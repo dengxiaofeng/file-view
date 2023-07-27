@@ -10,5 +10,4 @@ const options = {
   },
   umd: { output: 'dist' }
 }
-
 export default options;
