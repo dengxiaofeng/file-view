@@ -1,10 +1,10 @@
 {
   "name": "cube-viwer",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "keywords": [],
-  "main": "dist/cjs",
-  "module": "dist/esm",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "files": [
     "dist",
     "constant",
