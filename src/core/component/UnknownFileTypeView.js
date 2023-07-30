@@ -2,8 +2,8 @@
 import BaseViewer from './BaseViewer'
 
 import { getCssClass } from '../../util/getCssClass'
-
-var UnknownFileTypeView = BaseViewer.extend({
+import { _templateStore } from '../store/template-store'
+const UnknownFileTypeView = BaseViewer.extend({
 
   id: 'cp-unknown-file-type-view-wrapper',
 
@@ -21,12 +21,12 @@ var UnknownFileTypeView = BaseViewer.extend({
   },
 
   render: function () {
-    this.$el.html(templateStore.get('unknownFileTypeViewer')({
+    this.$el.html(_templateStore.get('unknownFileTypeViewer')({
       iconClass: getCssClass(this.model.get('type')),
       src: this.model.get('srcDownload') || this.model.get('src')
     }));
 
-    var fileView = this._fileViewer.getView();
+    const fileView = this._fileViewer.getView();
 
     // kill sidebar view.
     if (fileView.fileSidebarView.isAnyPanelInitialized()) {

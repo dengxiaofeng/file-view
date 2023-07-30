@@ -1,13 +1,13 @@
-var browserSupportedImageTypes = [ 'image/gif', 'image/jpeg', 'image/jpg', 'image/png', 'image/png', 'image/svg+xml', 'image/web', 'image/bmp' ]
+const browserSupportedImageTypes = [ 'image/gif', 'image/jpeg', 'image/jpg', 'image/png', 'image/png', 'image/svg+xml', 'image/web', 'image/bmp' ]
 
-var browserSupportedMultimediaTypes = [ 'video/mp4', 'video/m4v', 'video/youtube', 'audio/mp3', 'audio/mpeg' ];
+const browserSupportedMultimediaTypes = [ 'video/mp4', 'video/m4v', 'video/youtube', 'audio/mp3', 'audio/mpeg' ];
 
-var toLowerType = function (type) {
+const toLowerType = function (type) {
   return type && type.toLowerCase() || '';
 };
 
 
-var fileTypes = {
+const fileTypes = {
   isPDF: function (type) {
     var lowerType = toLowerType(type);
     return lowerType === 'application/pdf';

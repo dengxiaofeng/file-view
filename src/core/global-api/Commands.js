@@ -22,7 +22,7 @@ Commands.LookupViewer.prototype.execute = function (previewSrc, previewType, ove
   convertedFile.set('type', previewType);
   convertedFile.set('src', previewSrc);
 
-  var loadViewer = this._viewerRegistry.get(previewType);
+  const loadViewer = this._viewerRegistry.get(previewType);
 
   if (!loadViewer) {
     return rejectWithError(

@@ -20,6 +20,7 @@ const wordPlugin = BaseViewer.extend({
   //   this.viewer.zoomOut()
   // },
   render() {
+    console.log("this", this);
     this.$el.show().html(_templateStore.get('waitingMessage')({
       src: '',
       header: '您的预览即将出现!',
@@ -114,7 +115,7 @@ const wordPlugin = BaseViewer.extend({
 
     }
 
-    getBinaryContent('/docx', (error, data) => {
+    getBinaryContent(this._previewSrc, (error, data) => {
         if($('#cp-word-preview')) {
           docx.renderAsync(data, $("#cp-word-preview")[0]).then(res => console.log("res", res));
           this.trigger('viewerReady');

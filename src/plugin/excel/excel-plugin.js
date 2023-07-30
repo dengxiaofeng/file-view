@@ -1,10 +1,10 @@
+import $ from "jquery";
 import BaseViewer from '../../core/component/BaseViewer'
 import '../../resource/luckysheet/plugins/css/pluginsCss.css'
 import '../../resource/luckysheet/plugins/plugins.css'
 import '../../resource/luckysheet/assets/iconfont/iconfont.css'
 import '../../resource/luckysheet/css/luckysheet.css'
 import luckysheet from "../../resource/luckysheet/luckysheet.umd";
-import $ from "jquery";
 import { LuckyExcelHelpers } from './luckyExcelHelpers'
 import { _templateStore } from '../../core/store/template-store'
 const excelPlugin = BaseViewer.extend({
@@ -42,8 +42,8 @@ const excelPlugin = BaseViewer.extend({
     loadScript('https://dream-num.github.io/LuckyexcelDemo/plugins/js/plugin.js', () => {
       this.$el.html(`<div id="luckysheet" style=" margin: 0px; padding: 0px;position: absolute;width: 100%;max-width: 80%;left: 50%;top: 0;transform: translateX(-50%);bottom: 0px;"></div>`);
       if(luckysheet) {
-        LuckyExcelHelpers.transformExcelToLuckyByUrl("/excel"
-          , '测试', (exportJson, luckysheetfile) => {
+        LuckyExcelHelpers.transformExcelToLuckyByUrl(this._previewSrc
+          , '', (exportJson, luckysheetfile) => {
             if(exportJson.sheets==null || exportJson.sheets.length==0){
               // alert("Failed to read the content of the excel file, currently does not support xls files!");
               return;
