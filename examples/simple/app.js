@@ -1,4 +1,5 @@
-import FileViewer from "../../dist/esm";
+// import "../../src/resource/lib/pdf"
+import FileViewer from "../../src";
 window.FileViewer = FileViewer
 
 var selectors = {
@@ -42,11 +43,13 @@ var viewer = new FileViewer({
     enableMiniMode: true,
     viewers:['image']
 });
-
+console.log("files", files)
 viewer.updateFiles(files);
 
 $('a').click(function(event){
+  console.log($(this).attr('file-preview-id'))
   event.preventDefault()
+  debugger
   viewer.open({
     id: $(this).attr('file-preview-id')
   });

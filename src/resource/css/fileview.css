@@ -1,4 +1,3 @@
-/* module-key = 'com.atlassian.jira.jira-fileviewer-plugin:atlassian-fileviewer', location = 'node_modules/@atlassian/fileviewer/dist/fileviewer-styles.css' */
 #cp-control-panel-close {
   border-left: 1px solid #333;
   background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+MTYvaTAwMjdfY2xvc2UtZGlhbG9nPC90aXRsZT48ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz48cGF0aCBkPSJNOS42NCA4bDQuMDE2IDQuMDE2Yy4yMy4yMy4zNDQuNTAyLjM0NC44MiAwIC4zMTgtLjExNS41OS0uMzQ0LjgyLS4yMy4yMy0uNTAyLjM0NC0uODIuMzQ0LS4zMTggMC0uNTktLjExNS0uODItLjM0NEw4IDkuNjRsLTQuMDE2IDQuMDE2Yy0uMjMuMjMtLjUwMi4zNDQtLjgyLjM0NC0uMzE4IDAtLjU5LS4xMTUtLjgyLS4zNDQtLjIzLS4yMy0uMzQ0LS41MDItLjM0NC0uODIgMC0uMzE4LjExNS0uNTkuMzQ0LS44Mkw2LjM2IDggMi4zNzQgNC4wMTZjLS4yMy0uMjMtLjM0NC0uNTAzLS4zNDQtLjgyIDAtLjMxOC4xMTYtLjU4Ny4zNDUtLjgwNS4yMy0uMjMuNTAzLS4zNC44Mi0uMzQuMzE4IDAgLjU5LjExMy44Mi4zNDNMOCA2LjM3Nmw0LjAzLTQuMDNjLjIzLS4yMy41MDQtLjM0NS44MjItLjM0NS4zMTcgMCAuNTkuMTE3LjgyLjM0Ni4yMi4yMy4zMjguNTAyLjMyOC44MiAwIC4zMTgtLjExLjU4Ni0uMzI4LjgwNUw5LjY0MiA4eiIgZmlsbD0iI2ZmZiIgZmlsbC1ydWxlPSJldmVub2RkIi8+PC9zdmc+");
@@ -189,7 +188,7 @@
   background-size: contain;
 }
 #cp-error-message .cp-warning-sign-icon.size-48, #cp-error-message .cp-warning-sign-icon.size-96 {
-  background-image: url('/s/-btxz5u/800010/6411e0087192541a09d88223fb51a6a0/8.0.0/_/download/resources/com.atlassian.jira.jira-fileviewer-plugin:atlassian-fileviewer/cp-warning-sign-icon-48px.svg');
+  /*background-image: url('/s/-btxz5u/800010/6411e0087192541a09d88223fb51a6a0/8.0.0/_/download/resources/com.atlassian.jira.jira-fileviewer-plugin:atlassian-fileviewer/cp-warning-sign-icon-48px.svg');*/
 }
 #cp-error-message p {
   margin: 10px 0;
@@ -266,6 +265,11 @@
   left: 0 !important;
   height: 100% !important;
   z-index: 100;
+}
+
+#cp-word-preview {
+  height: 100%;
+  overflow: auto;
 }
 *[id^='cp-container-'] {
   background-color: rgba(51, 51, 51, 0.95);
@@ -363,6 +367,26 @@
 }
 .cp-viewer-layer {
   height: 100%;
+}
+.cp-viewer-layer #cp-excel-preview {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+#luckysheet_info_detail {
+  display: none!important;
+}
+
+#cp-excel-preview #luckysheet {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  max-width: 80%;
+  max-height: 100%;
+  margin: auto;
 }
 #cp-file-body.narrow {
   right: 350px;

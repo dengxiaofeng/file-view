@@ -3,7 +3,7 @@ import { pdfProperty } from './pdf-properties'
 function Cache(size) {
   let data = []
   this.push = function cachePush(view) {
-    var i = data.indexOf(view);
+    const i = data.indexOf(view);
     if (i >= 0) {
       data.splice(i, 1);
     }

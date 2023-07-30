@@ -3,9 +3,9 @@ import $ from 'jquery'
 // import { moduleStore } from '../store/module-store';
 //
 // var asyncViewerResource = null, asyncConfigResource = null;
-
+import VideoPlugin from '../../plugin/media/video-plugin'
 function videoViewProvider() {
-  return $.Deferred().resolve(require('../../plugin/media/video-plugin.js'))
+  return $.Deferred().resolve(VideoPlugin)
 }
 
 

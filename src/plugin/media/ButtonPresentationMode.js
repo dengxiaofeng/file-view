@@ -1,4 +1,4 @@
-var videojs = window.videojs;
+import videojs from 'video.js/dist/video.min'
 var ButtonPresentationMode = videojs.Button.extend({
   init: function (opts) {
     this._fileViewer = opts.fileViewer;

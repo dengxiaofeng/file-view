@@ -3,23 +3,25 @@ import BaseViewer from '../../core/component/BaseViewer'
 import fileTypes from '../../util/FileType';
 import _ from 'underscore'
 import { _templateStore } from '../../core/store/template-store';
-// import PluginProgressTooltips from './PluginProgressTooltips'
+import PluginProgressTooltips from './PluginProgressTooltips'
 // import ButtonPresentationMode from './ButtonPresentationMode'
+// import ButtonToggleHd from './ButtonToggleHd'
+import videojs from 'video.js/dist/video.min'
+
 import { keys, createConditionalKeyHandler } from '../../constant/keyboard';
 import $ from 'jquery'
 import './media.css'
-
+// import 'video.js/dist/video-js.min.css'
 window.HELP_IMPROVE_VIDEOJS = false;
-var  videojs = window.videojs
-var playerManager = new InstanceManager(videojs, function (player) {
-  console.log(player)
+const  videoInstance = videojs
+window.videojs = videoInstance
+const playerManager = new InstanceManager(videoInstance, function (player) {
  // player.tech() && player.pause()
   player.dispose()
 })
 
 
-var videojs = window.videojs
-var VideoView = BaseViewer.extend({
+const VideoView = BaseViewer.extend({
 
   id: 'cp-video-preview',
 
@@ -153,8 +155,7 @@ var VideoView = BaseViewer.extend({
       (this.$el.height() - this._paddingVertical),
       this._minHeight
     );
-    debugger
-    var $videoEl = $(this._videoPlayer.el());
+    var $videoEl = $(this.el);
     var videoWidth = $videoEl.width();
     var videoHeight = $videoEl.height();
 
@@ -171,7 +172,7 @@ var VideoView = BaseViewer.extend({
   _videoError: function () {
     var err = new Error('Media failed loading');
 
-    err.title = AJS.I18n.getText('无法加载媒体文件');
+    err.title = '无法加载媒体文件';
     err.description = this.model.get('src');
     err.icon = 'cp-multimedia-icon';
 
@@ -262,8 +263,8 @@ var VideoView = BaseViewer.extend({
   _registerPlugins: function () {
     var pluginsObject = {};
     // debugger
-    // videojs.plugin('pluginProgressTooltips', PluginProgressTooltips);
-    // pluginsObject.pluginProgressTooltips = {};
+    videojs.plugin('pluginProgressTooltips', PluginProgressTooltips);
+    pluginsObject.pluginProgressTooltips = {};
 
     // videojs.plugin('presentation', ButtonPresentationMode.asPlugin(this._fileViewer));
     // pluginsObject.presentation = {viewer: this};
@@ -293,10 +294,10 @@ var VideoView = BaseViewer.extend({
     }
   },
   _setupPlayer: function (player) {
-    debugger
     var $player = $('#' + this.playerId);
     console.log(player)
     this._videoPlayer = player;
+    console.log("_videoPlayer",  this._videoPlayer, player)
     this._handleResize();
 
     if (this._isAudio) {

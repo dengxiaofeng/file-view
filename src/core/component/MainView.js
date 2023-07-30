@@ -40,7 +40,6 @@ var MainView = Backbone.View.extend({
   },
   initialize: function (params) {
     var options = _.extend({}, params)
-
     this._fileViewer = options.model.get('fileViewer')
 
     this._currentFile = null;
@@ -156,7 +155,6 @@ var MainView = Backbone.View.extend({
   render: function () {
 
     this.$el.empty().append(_templateStore.get('fileView')());
-
     this.$header = this.$('#cp-header');
     this.$body = this.$('#cp-body');
     this.$footer = this.$('#cp-footer');
@@ -178,29 +176,29 @@ var MainView = Backbone.View.extend({
   },
   showFile: function (file) {
 
-    var needsToRerenderContent = !this.fileContentView.isLayerInitialized('content') ||
+    const needsToRerenderContent = !this.fileContentView.isLayerInitialized('content') ||
       MainView._needsToRerenderContent(this._currentFile, file);
 
     if (MainView._filesWillRenderTheSame(this._currentFile, file)) {
       return MainView._skipRenderingOf(file);
     }
 
-    var contentView, toolbarView, spinnerView, waitingView, errorView;
-    var lookupViewerCommand = new Commands.LookupViewer(file, this._fileViewer._viewerRegistry);
+    let contentView, toolbarView, spinnerView, waitingView, errorView;
+    const lookupViewerCommand = new Commands.LookupViewer(file, this._fileViewer._viewerRegistry);
 
     // allow people to shut down themselves
     this.trigger('cancelShow');
 
-    var fileViewed = new $.Deferred();
+    const fileViewed = new $.Deferred();
 
     this._showFileChain.pipe(function () {
-      var fileHandled = new $.Deferred();
+      const fileHandled = new $.Deferred();
 
-      var p = $.when().pipe(function validateFile() {
+      let p = $.when().pipe(function validateFile() {
 
         this._currentFile = file;
         this._viewState = null;
-        var validationResult;
+        let validationResult;
 
         if (file) {
           if (needsToRerenderContent) {
@@ -246,7 +244,7 @@ var MainView = Backbone.View.extend({
           if (!(isPreviewGenerated && generatePreview)) {
             return $.when(file.get('src'), file.get('type'));
           }
-          debugger
+
           waitingView.showMessage(
             file,
             '您的预览即将出现！',
@@ -260,7 +258,6 @@ var MainView = Backbone.View.extend({
 
 
             return generatePreview(file).pipe(function () {
-              debugger
               if (source) {
                 return $.when(source, type, overwrites);
               }
@@ -334,7 +331,6 @@ var MainView = Backbone.View.extend({
     if (!id) {
       return $.when(true, config.get('src'), config.get('type'))
     }
-    debugger
     $.ajax({
       url: fileView.getConfig().convertServer,
       type: 'POST',
@@ -343,7 +339,6 @@ var MainView = Backbone.View.extend({
       }
     }).done(function (res) {
       if (res.status === 200) {
-        debugger
         deferred.resolve(false, buildURL ? buildURL(res.data.url):res.data.url, 'application/pdf')
       }
     }).fail(function (res) {

@@ -124,12 +124,18 @@
     "webpack-dev-middleware": "^3.7.0",
     "webpack-hot-middleware": "^2.25.0",
     "atob": "^2.1.2",
-    "babel-preset-env": "^1.7.0"
+    "babel-preset-env": "^1.7.0",
+    "cube-viwer": "^0.0.1",
+    "luckysheet": "^2.1.4",
+    "file-loader": "^6.2.0"
   },
   "dependencies": {
     "backbone": "^1.4.0",
     "underscore": "^1.9.1",
     "lodash.camelcase": "^4.3.0",
-    "jquery": "^2.2.3"
+    "jquery": "^2.2.3",
+    "jszip": "^3.10.1",
+    "video.js": "^8.3.0",
+    "docx-preview": "^0.1.18"
   }
 }

@@ -9,7 +9,7 @@ function AnnotationLayerBuilder(options) {
 }
 
 AnnotationLayerBuilder.prototype.create = function () {
-  var self = this
+  const self = this
 
   function AnnotationLayer(options) {
     this.layerDiv = options.layerDiv;
@@ -35,8 +35,8 @@ AnnotationLayerBuilder.prototype.create = function () {
     this.pinsView.render();
   }
   AnnotationLayer.prototype.setupRenderLayoutTimer = function () {
-    var self = this;
-    var lastScroll = (this.lastScrollSource === null ? 0 : this.lastScrollSource.lastScroll);
+    const self = this;
+    const lastScroll = (this.lastScrollSource === null ? 0 : this.lastScrollSource.lastScroll);
     if (Date.now() - lastScroll > pdfProperty.RENDER_DELAY) {
       this.render();
     } else {

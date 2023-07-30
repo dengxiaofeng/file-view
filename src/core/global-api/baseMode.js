@@ -1,6 +1,6 @@
 import { keys } from '../../constant/keyboard';
 
-var baseMode = {
+const baseMode = {
   activateHook: function (mainView) {
     mainView.$el.on('click #cp-file-body', mainView._onClickToBackground.bind(mainView));
     var $arrowLayer = mainView.fileContentView.getLayerForName('arrows').$el;
@@ -115,7 +115,6 @@ var baseMode = {
       title: '开始演示',
       className: 'cp-toolbar-presentation',
       predicate: function () {
-        debugger
         return this._viewer && this._fileViewer.getConfig().enablePresentationMode;
       },
       handler: function () {

@@ -1,21 +1,16 @@
 import * as utils from './utils'
-
 import { pdfProperty } from './pdf-properties';
-
 import { renderStatus } from './render-status';
-
 import { presentationMode } from './presentation-mode'
 import TextLayerBuilder from './pdf-text-layer'
 import { cache } from './pdf-cache';
-
-
-var PDFJS = window.PDFJS;
-var CustomStyle = PDFJS.CustomStyle;
+const PDFJS = window.PDFJS;
+const CustomStyle = PDFJS.CustomStyle;
 
 function scrollIntoView(element, containerEl, spot) {
-  var parent = containerEl;
-  var offsetY = element.offsetTop + element.clientTop;
-  var offsetX = element.offsetLeft + element.clientLeft;
+  let parent = containerEl;
+  let offsetY = element.offsetTop + element.clientTop;
+  let offsetX = element.offsetLeft + element.clientLeft;
   if (!parent) {
     console.error('container element is not set -- cannot scroll');
     return;
@@ -67,10 +62,10 @@ function PageView(container, id, scale, defaultViewport, parentViewer) {
   this.annotationLayer = null; // custom layer for Confluence annotations pins
   this.linkLayer = null; // contains links refered to as AnnotationLayer in PDFJS
 
-  var anchor = document.createElement('a');
+  const anchor = document.createElement('a');
   anchor.name = '' + this.id;
 
-  var div = this.el = document.createElement('div');
+  const div = this.el = document.createElement('div');
   div.id = 'pageContainer' + this.id;
   div.setAttribute('data-page-number', this.id);
   div.className = 'page';
@@ -83,7 +78,7 @@ function PageView(container, id, scale, defaultViewport, parentViewer) {
   this.setPdfPage = function (pdfPage) {
     this.pdfPage = pdfPage;
     this.pdfPageRotate = pdfPage.rotate;
-    var totalRotation = (this.rotation + this.pdfPageRotate) % 360;
+    const totalRotation = (this.rotation + this.pdfPageRotate) % 360;
     this.viewport = pdfPage.getViewport(this.scale * pdfProperty.CSS_UNITS, totalRotation);
     this.stats = pdfPage.stats;
     this.reset();
@@ -107,9 +102,9 @@ function PageView(container, id, scale, defaultViewport, parentViewer) {
     div.style.width = Math.floor(this.viewport.width) + 'px';
     div.style.height = Math.floor(this.viewport.height) + 'px';
 
-    var childNodes = div.childNodes;
-    for (var i = div.childNodes.length - 1; i >= 0; i--) {
-      var node = childNodes[ i ];
+    const childNodes = div.childNodes;
+    for (let i = div.childNodes.length - 1; i >= 0; i--) {
+      const node = childNodes[ i ];
       if ((this.zoomLayer && this.zoomLayer === node) ||
         (keepAnnotations && this.annotationLayer === node) ||
         (keepLinks && this.linkLayer === node)) {

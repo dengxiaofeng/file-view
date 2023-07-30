@@ -18,7 +18,6 @@ var DownloadButton = Backbone.View.extend({
   },
 
   _triggerAnalytics: function () {
-    debugger
     this._fileViewer.trigger('fv.download');
     this._fileViewer.analytics.send('files.fileviewer-web.file.download', {
       actionType: 'button'
@@ -26,7 +25,6 @@ var DownloadButton = Backbone.View.extend({
   }
 }, {
   isDownloadable: function (fileViewer) {
-    debugger
     var file = fileViewer.getCurrentFile();
     return file && file.get('downloadable');
   }

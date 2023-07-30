@@ -1,13 +1,12 @@
 import $ from 'jquery'
 // import File from '../File'
 import { moduleStore } from '../store/module-store';
+import PdfPlugin from '../../plugin/pdf/pdf-plugin';
 //
 // var asyncViewerResource = null, asyncConfigResource = null;
-var asyncViewerResource = null,
-  asyncConfigResource = null;
+let asyncViewerResource = null, asyncConfigResource = null;
 
 function pdfViewProvider() {
-  debugger
   if (!asyncViewerResource) {
     asyncViewerResource = moduleStore.get('pdf-viewer');
   }
@@ -15,17 +14,13 @@ function pdfViewProvider() {
     asyncConfigResource = moduleStore.get('pdf-config');
   }
 
-  console.log(moduleStore.get('pdf-config'))
-
-  var viewerInstance = $.Deferred();
+  const viewerInstance = $.Deferred();
 
   $.when(asyncViewerResource, asyncConfigResource).done(function (viewer, config) {
-    var PDFViewer = require('../../plugin/pdf/pdf-plugin.js')
-    var PDFJS = window.PDFJS;
+    // const PDFViewer = PdfPlugin
+    const PDFJS = window.PDFJS;
     PDFJS.workerSrc = config.workerSrc;
-    // PDFJS.cMapUrl = config.cMapUrl;
-
-    viewerInstance.resolve(PDFViewer);
+    viewerInstance.resolve(PdfPlugin);
   });
   return viewerInstance.promise()
   // return $.Deferred().resolve(require('../../plugin/pdf/pdf-plugin.js'))

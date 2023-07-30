@@ -31,11 +31,11 @@ function PDFViewer(options) {
 PDFViewer.prototype.watchScroll = function pdfViewWatchScroll(viewAreaElement, state, callback) {
   state.down = true;
   state.lastY = viewAreaElement.scrollTop;
-  var viewer = this;
+  const viewer = this;
   $(viewAreaElement).on('scroll.pdfViewer', function webViewerScroll(evt) {
     viewer.lastScroll = Date.now();
-    var currentY = viewAreaElement.scrollTop;
-    var lastY = state.lastY;
+    const currentY = viewAreaElement.scrollTop;
+    const lastY = state.lastY;
     if (currentY > lastY) {
       state.down = true;
     } else if (currentY < lastY) {
@@ -71,13 +71,13 @@ PDFViewer.prototype._setScaleUpdatePages = function (newScale, newValue, resetAu
   if (newScale === this.currentScale) {
     return;
   }
-  for (var i = 0, ii = this.pages.length; i < ii; i++) {
+  for (let i = 0, ii = this.pages.length; i < ii; i++) {
     this.pages[ i ].update(newScale);
   }
   this.currentScale = newScale;
 
   if (!noScroll) {
-    var page = this.page, dest;
+    let page = this.page, dest;
     if (this.currentPosition && !pdfProperty.IGNORE_CURRENT_POSITION_ON_ZOOM) {
       page = this.currentPosition.page;
       dest = [ null, {name: 'XYZ'}, this.currentPosition.left,
@@ -85,7 +85,7 @@ PDFViewer.prototype._setScaleUpdatePages = function (newScale, newValue, resetAu
     }
     this.pages[ page - 1 ].scrollIntoView(dest);
   }
-  var event = document.createEvent('UIEvents');
+  const event = document.createEvent('UIEvents');
   event.initUIEvent('scalechange', false, false, window, 0);
   event.scale = newScale;
   event.resetAutoSettings = resetAutoSettings;
@@ -104,21 +104,19 @@ PDFViewer.prototype.setScale = function (value, resetAutoSettings, noScroll) {
   if (value === 'custom') {
     return;
   }
-  var scale = parseFloat(value);
+  let scale = parseFloat(value);
 
   if (scale > 0) {
     this._setScaleUpdatePages(scale, value, true, noScroll);
   } else {
-    var currentPage = this.pages[ this.page - 1 ];
+    let currentPage = this.pages[ this.page - 1 ];
     if (!currentPage) {
       return;
     }
-    var hPadding = this._pagePadding.x;
-    var vPadding = this._pagePadding.y;
-    var pageWidthScale = (this.el.container.clientWidth - hPadding) /
-      currentPage.width * currentPage.scale;
-    var pageHeightScale = (this.el.container.clientHeight - vPadding) /
-      currentPage.height * currentPage.scale;
+    let hPadding = this._pagePadding.x;
+    let vPadding = this._pagePadding.y;
+    let pageWidthScale = (this.el.container.clientWidth - hPadding) / currentPage.width * currentPage.scale;
+    let pageHeightScale = (this.el.container.clientHeight - vPadding) / currentPage.height * currentPage.scale;
     switch (value) {
       case 'page-actual':
         scale = 1;
@@ -151,7 +149,7 @@ PDFViewer.prototype.setScale = function (value, resetAutoSettings, noScroll) {
 };
 
 PDFViewer.prototype.zoomIn = function (ticks) {
-  var newScale = this.currentScale;
+  let newScale = this.currentScale;
   do {
     newScale = (newScale * pdfProperty.DEFAULT_SCALE_DELTA).toFixed(2);
     newScale = Math.ceil(newScale * 10) / 10;
@@ -161,7 +159,7 @@ PDFViewer.prototype.zoomIn = function (ticks) {
 };
 
 PDFViewer.prototype.zoomOut = function (ticks) {
-  var newScale = this.currentScale;
+  let newScale = this.currentScale;
   do {
     newScale = (newScale / pdfProperty.DEFAULT_SCALE_DELTA).toFixed(2);
     newScale = Math.floor(newScale * 10) / 10;
@@ -411,8 +409,8 @@ PDFViewer.prototype.renderHighestPriority = function pdfViewRenderHighestPriorit
   }
 
   // Pages have a higher priority than thumbnails, so check them first.
-  var visiblePages = this.getVisiblePages();
-  var pageView = this.getHighestPriority(visiblePages, this.pages, noop.down);
+  const visiblePages = this.getVisiblePages();
+  const pageView = this.getHighestPriority(visiblePages, this.pages, noop.down);
   if (pageView) {
     this.renderView(pageView, 'page');
     return;
@@ -633,7 +631,7 @@ PDFViewer.prototype.scrollPageIntoView = function (pageNumber, dest) {
     return;
   }
 
-  var pageView = this.pages[ pageNumber - 1 ];
+  let pageView = this.pages[ pageNumber - 1 ];
 
   if (this.isInPresentationMode) {
     if (this._currentPageNumber !== pageView.id) {
@@ -649,14 +647,14 @@ PDFViewer.prototype.scrollPageIntoView = function (pageNumber, dest) {
     return;
   }
 
-  var x = 0, y = 0;
-  var width = 0, height = 0, widthScale, heightScale;
-  var changeOrientation = (pageView.rotation % 180 === 0 ? false : true);
-  var pageWidth = (changeOrientation ? pageView.height : pageView.width) /
+  let x = 0, y = 0;
+  let width = 0, height = 0, widthScale, heightScale;
+  let changeOrientation = (pageView.rotation % 180 === 0 ? false : true);
+  let pageWidth = (changeOrientation ? pageView.height : pageView.width) /
     pageView.scale / pdfProperty.CSS_UNITS;
-  var pageHeight = (changeOrientation ? pageView.width : pageView.height) /
+  let pageHeight = (changeOrientation ? pageView.width : pageView.height) /
     pageView.scale / pdfProperty.CSS_UNITS;
-  var scale = 0;
+  let scale = 0;
   switch (dest[ 1 ].name) {
     case 'XYZ':
       x = dest[ 2 ];
@@ -712,7 +710,7 @@ PDFViewer.prototype.scrollPageIntoView = function (pageNumber, dest) {
     return;
   }
 
-  var boundingRect = [
+  let boundingRect = [
     pageView.viewport.convertToViewportPoint(x, y),
     pageView.viewport.convertToViewportPoint(x + width, y + height)
   ];

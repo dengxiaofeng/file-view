@@ -4674,7 +4674,7 @@ if (typeof PDFJS === 'undefined') {
         fa = u.FontLoader, H = y.CanvasGraphics, O = y.createScratchCanvas, M = B.Metadata, J = l.getDefaultSetting,
         Y = !1, aa, L = !1;
       e = !1;
-      'undefined' === typeof window && (Y = !0, 'undefined' === typeof require.ensure && (require.ensure = require('node-ensure')), e = !0);
+      // 'undefined' === typeof window && (Y = !0, 'undefined' === typeof require.ensure && (require.ensure = require('node-ensure')), e = !0);
       'undefined' !== typeof __webpack_require__ && (e = !0);
       'undefined' !== typeof requirejs && requirejs.toUrl && (aa =
         requirejs.toUrl('pdfjs-dist/build/pdf.worker.js'));

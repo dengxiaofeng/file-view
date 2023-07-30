@@ -1,5 +1,6 @@
 import _ from 'underscore'
 import Backbone from 'backbone'
+import $ from 'jquery';
 import ConstantsDictionary from '../global-api/constants-dictionary'
 import MainView from './MainView'
 import FileState from './FileState'
@@ -12,6 +13,8 @@ import Storage from '../../util/storage'
 import imageViewProvider from '../provider/image-view-provider'
 import pdfViewProvider from '../provider/pdf-view-provider'
 import videoViewProvider from '../provider/video-view-provider'
+import excelViewProvider from '../provider/excel-view-provider'
+import wordViewProvider from '../provider/word-view-provider'
 import unknownFileTypeViewProvider from '../provider/unknown-file-type-view-provider'
 import Analytics from '../global-api/Analytics'
 import { djb2 } from '../../util/util';
@@ -36,19 +39,20 @@ var FileViewer = function (config) {
   this._fileState = new FileState();
   this._viewerRegistry = new ViewerRegistry();
   this._analytics = new Analytics(config.analyticsBackend, this, djb2);
-
   if (config.viewers.indexOf('image') !== -1) {
     this._viewerRegistry.register(fileTypes.isImageBrowserSupported, imageViewProvider, 0);
   }
 
-  if (config.viewers.indexOf('document') !== -1) {
-    this._viewerRegistry.register(fileTypes.isPDF, pdfViewProvider, 0)
-  }
 
+  if (config.viewers.indexOf('document') !== -1) {
+    this._viewerRegistry.register(fileTypes.isPDF, pdfViewProvider, 0);
+    this._viewerRegistry.register(fileTypes.isSpreadsheet, excelViewProvider, 0);
+    this._viewerRegistry.register(fileTypes.isWordProcessing, wordViewProvider, 0);
+  }
   if (config.viewers.indexOf('video') !== -1) {
-    debugger
     this._viewerRegistry.register(fileTypes.isMultimediaBrowserSupported, videoViewProvider, 0);
   }
+
 
   this._viewerRegistry.register(fileTypes.matchAll, unknownFileTypeViewProvider, 100);
 
@@ -332,7 +336,7 @@ FileViewer.prototype.removeFileAction = function (opts) {
 };
 
 FileViewer.prototype.supports = function (contentType) {
-  var previewer = this._viewerRegistry.get(contentType);
+  const previewer = this._viewerRegistry.get(contentType);
   return previewer && previewer !== unknownFileTypeViewProvider;
 };
 

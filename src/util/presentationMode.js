@@ -46,7 +46,6 @@ var onFullscreenChange = function (e) {
 var presentationMode = {
 
   activateHook: function (mainView) {
-    debugger
     $(document).on(
       'fullscreenchange webkitfullscreenchange mozfullscreenchange MSFullscreenChange',
       onFullscreenChange.bind(mainView));
@@ -61,7 +60,6 @@ var presentationMode = {
   },
 
   setup: function (mainView, viewer) {
-    debugger
     this._originalScrollTop = $('body').scrollTop();
     $('#cp-file-body').addClass('presentation');
     $(document).on('keydown.modeKeys', this._handleKeys.bind(mainView));
@@ -72,7 +70,6 @@ var presentationMode = {
   },
 
   teardown: function (mainView, viewer, isModeChanged) {
-    debugger
     $('#cp-file-body').removeClass('presentation');
     $(document).off('keydown.modeKeys');
 
@@ -87,7 +84,6 @@ var presentationMode = {
   showsArrowLayer: false,
 
   _handleKeys: function (e) {
-    debugger
     e.preventDefault();
     var contentView, viewer;
 

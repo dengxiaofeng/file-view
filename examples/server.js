@@ -8,7 +8,8 @@ const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const WebpackConfig = require('./webpack.config')
-const path = require('path')
+const path = require('path');
+const fs = require('fs');
 
 
 const app = express()
@@ -43,16 +44,49 @@ router.all('*',function(req, res, next){
 	res.header('Access-Control-Allow-Headers','Content-Type')
 })
 
+app.get('/about', function (req, res) {
+  res.send('about')
+});
+
+app.get('/excel', (req, res) => {
+  const filePath = path.resolve(__dirname, './excel.xlsx');
+  const cs = fs.createReadStream(filePath);
+  cs.on('data', chunk => {
+    res.write(chunk)
+  });
+
+  cs.on('end', () => {
+    res.status(200);
+    res.end();
+  })
+});
+
+app.get('/docx', (req, res) => {
+  const filePath = path.resolve(__dirname, './测试.docx');
+  res.writeHead(200, {
+    'Content-Type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+  })
+  const cs = fs.createReadStream(filePath);
+  cs.on('data', chunk => {
+    res.write(chunk)
+  });
+
+  cs.on('end', () => {
+    res.status(200);
+    res.end();
+  })
+});
+
 // router.post('/jodconverter/PDF/convertFromUrl', function(req, res) {
 //   res.set(cors)
 //   res.json(req)
 // })
-// 
+//
 
 // app.use('/jodconverter', proxy('192.168.2.231:8086'));
 app.use(
   '/jodconverter',
-  proxy({ 
+  proxy({
   	target: 'http://192.168.2.231:8086',
   	changeOrigin: true,
   	logLevel: 'debug',
@@ -66,8 +100,9 @@ app.use(
 
 
 
+
 const port = process.env.PORT || 8080
 
 module.exports = app.listen(port, ()=>{
 	console.log(`Server listening on http://localhost:${port}, Ctrl+C to stop`)
-}) 
+})

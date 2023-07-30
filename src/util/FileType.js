@@ -1,4 +1,4 @@
-var browserSupportedImageTypes = [ 'image/gif', 'image/jpeg', 'image/png', 'image/svg+xml', 'image/web', 'image/bmp' ]
+var browserSupportedImageTypes = [ 'image/gif', 'image/jpeg', 'image/jpg', 'image/png', 'image/png', 'image/svg+xml', 'image/web', 'image/bmp' ]
 
 var browserSupportedMultimediaTypes = [ 'video/mp4', 'video/m4v', 'video/youtube', 'audio/mp3', 'audio/mpeg' ];
 
@@ -40,8 +40,6 @@ var fileTypes = {
     return /^audio\/.*/i.test(type) || lowerType === 'audio';
   },
   isImageBrowserSupported: function (type) {
-    debugger
-    console.log(type)
     return browserSupportedImageTypes.indexOf(type.toLowerCase()) !== -1;
   },
   isMultimediaBrowserSupported: function (type) {

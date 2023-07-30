@@ -23,8 +23,7 @@ ViewerRegistry.isValidWeight = function (weight) {
 
 
 ViewerRegistry.prototype.register = function (fileType, previewer, weight) {
-  var matchesFileType = typeof fileType === 'function' ? fileType : createMatchFn(fileType);
-
+  const matchesFileType = typeof fileType === 'function' ? fileType : createMatchFn(fileType);
   weight = weight || 10;
 
   this._handlers.push({

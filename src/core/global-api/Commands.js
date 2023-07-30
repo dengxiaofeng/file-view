@@ -15,7 +15,6 @@ Commands.LookupViewer = function (originalFile, viewerRegistry) {
 };
 
 Commands.LookupViewer.prototype.execute = function (previewSrc, previewType, overwrites) {
-  debugger
   var convertedFile = new File(this._originalFile.toJSON());
 
   convertedFile.set(overwrites);
@@ -29,11 +28,9 @@ Commands.LookupViewer.prototype.execute = function (previewSrc, previewType, ove
     return rejectWithError(
       '\u6b64\u6587\u4ef6\u7c7b\u578b\u6ca1\u6709\u67e5\u770b\u4eba\u3002');
   }
-  var dfd = $.Deferred();
-  console.log(loadViewer)
+  const dfd = $.Deferred();
   loadViewer().then(function (Viewer) {
-    console.log(Viewer)
-    dfd.resolve(Viewer.default, previewSrc, convertedFile);
+    dfd.resolve(Viewer, previewSrc, convertedFile);
   }).fail(function () {
     dfd.fail(arguments);
   });

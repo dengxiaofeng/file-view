@@ -35,7 +35,6 @@ var ToolbarLayer = Backbone.View.extend({
   },
 
   render: function () {
-    debugger
     this.$el.html(_templateStore.get('toolbar')({
       actions: this._actions
     }));
