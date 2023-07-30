@@ -70,7 +70,7 @@ module.exports = {
 	    new webpack.HotModuleReplacementPlugin(),
 	    new webpack.NoEmitOnErrorsPlugin()
   	],
-  	externals: {
- 	  jquery: "jQuery",
+  externals: {
+ 	    jquery: "jQuery",
 	}
 }
