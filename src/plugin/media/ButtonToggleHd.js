@@ -4,7 +4,7 @@ import $ from 'jquery'
 import videojs from 'video.js/dist/video.min'
 // video.js
 
-var ButtonToggleHd = videojs.Button.extend({
+const ButtonToggleHd = videojs.Button.extend({
   init: function (opts) {
     this._fileViewer = opts.fileViewer;
     this._player = opts.player;
@@ -58,10 +58,10 @@ ButtonToggleHd.prototype.fixPreload = function () {
 };
 
 ButtonToggleHd.prototype.switchSource = function (options) {
-  var player = this._player;
-  var playerEl = $(player.el());
-  var wasPaused = player.paused();
-  var hasStarted = playerEl.hasClass('vjs-has-started');
+  const player = this._player;
+  const playerEl = $(player.el());
+  const wasPaused = player.paused();
+  const hasStarted = playerEl.hasClass('vjs-has-started');
 
   this.fixPreload();
 
@@ -98,9 +98,9 @@ ButtonToggleHd.prototype.switchSource = function (options) {
 };
 
 ButtonToggleHd.prototype.toggleSource = function () {
-  var player = this._player;
-  var playerEl = $(player.el());
-  var options = {
+  const player = this._player;
+  const playerEl = $(player.el());
+  const options = {
     position: player.tech.currentTime(),
     src: '',
     poster: ''

@@ -32,11 +32,11 @@ PDFLinkService.prototype = {
 }
 
 PDFLinkService.prototype.navigateTo = function (dest) {
-  var destString = '';
-  var self = this;
+  let destString = '';
+  const self = this;
 
-  var goToDestination = function (destRef) {
-    var pageNumber = destRef instanceof Object ?
+  const goToDestination = function (destRef) {
+    let pageNumber = destRef instanceof Object ?
       self._pagesRefCache[ destRef.num + ' ' + destRef.gen + ' R' ] :
       (destRef + 1);
     if (pageNumber) {
@@ -53,15 +53,15 @@ PDFLinkService.prototype.navigateTo = function (dest) {
       }
     } else {
       self.pdfDocument.getPageIndex(destRef).then(function (pageIndex) {
-        var pageNum = pageIndex + 1;
-        var cacheKey = destRef.num + ' ' + destRef.gen + ' R';
+        const pageNum = pageIndex + 1;
+        const cacheKey = destRef.num + ' ' + destRef.gen + ' R';
         self._pagesRefCache[ cacheKey ] = pageNum;
         goToDestination(destRef);
       });
     }
   };
 
-  var destinationPromise;
+  let destinationPromise;
   if (typeof dest === 'string') {
     destString = dest;
     destinationPromise = this.pdfDocument.getDestination(dest);
@@ -82,17 +82,17 @@ PDFLinkService.prototype.getDestinationHash = function (dest) {
     return this.getAnchorUrl('#' + escape(dest));
   }
   if (dest instanceof Array) {
-    var destRef = dest[ 0 ];
-    var pageNumber = destRef instanceof Object ?
+    let destRef = dest[ 0 ];
+    let pageNumber = destRef instanceof Object ?
       this._pagesRefCache[ destRef.num + ' ' + destRef.gen + ' R' ] :
       (destRef + 1);
     if (pageNumber) {
-      var pdfOpenParams = this.getAnchorUrl('#page=' + pageNumber);
-      var destKind = dest[ 1 ];
+      let pdfOpenParams = this.getAnchorUrl('#page=' + pageNumber);
+      let destKind = dest[ 1 ];
       if (typeof destKind === 'object' && 'name' in destKind &&
         destKind.name === 'XYZ') {
-        var scale = (dest[ 4 ] || this.pdfViewer.currentScaleValue);
-        var scaleNumber = parseFloat(scale);
+        let scale = (dest[ 4 ] || this.pdfViewer.currentScaleValue);
+        const scaleNumber = parseFloat(scale);
         if (scaleNumber) {
           scale = scaleNumber * 100;
         }
@@ -113,7 +113,7 @@ PDFLinkService.prototype.getAnchorUrl = function (anchor) {
 
 PDFLinkService.prototype.setHash = function (hash) {
   if (hash.indexOf('=') >= 0) {
-    var params = parseQueryString(hash);
+    const params = parseQueryString(hash);
     if ('nameddest' in params) {
       if (this.pdfHistory) {
         this.pdfHistory.updateNextHashParam(params.nameddest);
@@ -121,14 +121,14 @@ PDFLinkService.prototype.setHash = function (hash) {
       this.navigateTo(params.nameddest);
       return;
     }
-    var pageNumber, dest;
+    let pageNumber, dest;
     if ('page' in params) {
       pageNumber = (params.page | 0) || 1;
     }
     if ('zoom' in params) {
-      var zoomArgs = params.zoom.split(',');
-      var zoomArg = zoomArgs[ 0 ];
-      var zoomArgNumber = parseFloat(zoomArg);
+      let zoomArgs = params.zoom.split(',');
+      let zoomArg = zoomArgs[ 0 ];
+      let zoomArgNumber = parseFloat(zoomArg);
 
       if (zoomArg.indexOf('Fit') === -1) {
         dest = [ null, {name: 'XYZ'},
@@ -163,7 +163,7 @@ PDFLinkService.prototype.setHash = function (hash) {
       this.page = pageNumber; // simple page
     }
     if ('pagemode' in params) {
-      var event = document.createEvent('CustomEvent');
+      const event = document.createEvent('CustomEvent');
       event.initCustomEvent('pagemode', true, true, {
         mode: params.pagemode
       });
@@ -213,14 +213,14 @@ PDFLinkService.prototype.executeNamedAction = function (action) {
     default:
       break;
   }
-  var event = document.createEvent('CustomEvent');
+  const event = document.createEvent('CustomEvent');
   event.initCustomEvent('namedaction', true, true, {
     action: action
   });
   this.pdfViewer.container.dispatchEvent(event);
 }
 PDFLinkService.prototype.cachePageRef = function (pageNum, pageRef) {
-  var refStr = pageRef.num + ' ' + pageRef.gen + ' R';
+  const refStr = pageRef.num + ' ' + pageRef.gen + ' R';
   this._pagesRefCache[ refStr ] = pageNum;
 }
 

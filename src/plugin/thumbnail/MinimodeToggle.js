@@ -2,7 +2,7 @@ import Backbone from 'backbone'
 import { _templateStore } from '../../core/store/template-store';
 
 
-var MinimodeToggle = Backbone.View.extend({
+const MinimodeToggle = Backbone.View.extend({
   events: {
     'click #cp-files-label': '_toggleMinimode'
   },
@@ -17,7 +17,7 @@ var MinimodeToggle = Backbone.View.extend({
   },
   _toggleMinimode: function (event) {
     event.preventDefault()
-    var analytics = this._fileViewer.analytics
+    const analytics = this._fileViewer.analytics
 
     if(this._sinkView.isPanelInitialized('minimode')){
       this._sinkView.teardownPanel('minimode')
@@ -29,7 +29,7 @@ var MinimodeToggle = Backbone.View.extend({
     this._setShowAllFilesVisible();
   },
   _setShowAllFilesVisible: function () {
-    var visible = this._sinkView.isPanelInitialized('minimode')
+    const visible = this._sinkView.isPanelInitialized('minimode')
     this.$('.cp-files-collapser.up').toggleClass('hidden', visible);
     this.$('.cp-files-collapser.down').toggleClass('hidden', !visible);
   }

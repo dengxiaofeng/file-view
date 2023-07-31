@@ -1,7 +1,7 @@
 import Backbone from 'backbone'
 import file from './File'
 
-var Files = Backbone.Collection.extend({
+const Files = Backbone.Collection.extend({
   model: file,
 
   getIndexWithCID: function (cid) {

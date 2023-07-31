@@ -1,10 +1,10 @@
 import MinimodeToggle from './MinimodeToggle'
 import FileMinimodeView from './MinimodePanel'
 
-var minimodePlugin = function (fileViewer) {
-  var fileView = fileViewer.getView()
-  var sinkView = fileView.fileSinkView;
-  var metaView = fileView.fileMetaView;
+const minimodePlugin = function (fileViewer) {
+  const fileView = fileViewer.getView()
+  const sinkView = fileView.fileSinkView;
+  const metaView = fileView.fileMetaView;
 
   if (!fileViewer.getConfig().enableMiniMode) {
     return

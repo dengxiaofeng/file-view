@@ -1,10 +1,10 @@
-var Storage = function (customStorage, namespace) {
+const Storage = function (customStorage, namespace) {
   this._namespace = namespace || '';
   this._storage = this._getStorage(customStorage);
 };
 
 Storage.prototype.getItem = function (key) {
-  var storageValue;
+  let storageValue;
   key = this._namespace + key.toString();
   storageValue = new StorageValue();
   storageValue.fromJSON(this._storage.getItem(key));
@@ -29,7 +29,7 @@ Storage.prototype.removeItem = function (key) {
 };
 
 Storage.prototype._hasLocalStorage = function () {
-  var test = this._namespace + 'hasLocalStorage';
+  const test = this._namespace + 'hasLocalStorage';
 
   try {
     localStorage.setItem(test, test);
@@ -74,7 +74,7 @@ Storage.localStorage = {
 };
 
 
-var StorageValue = Storage.StorageValue = function (value, expiry) {
+const StorageValue = Storage.StorageValue = function (value, expiry) {
   this.value = value;
   this._setExpiry(expiry);
 };
@@ -94,7 +94,7 @@ StorageValue.prototype.isExpired = function () {
 
 
 StorageValue.prototype.fromJSON = function (stringifiedJson) {
-  var json;
+  let json;
   stringifiedJson = stringifiedJson || '{}';
   json = JSON.parse(stringifiedJson);
   this.value = json.value;

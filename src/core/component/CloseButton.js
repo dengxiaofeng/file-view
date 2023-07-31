@@ -1,7 +1,7 @@
 import Backbone from 'backbone'
 import { _templateStore } from '../store/template-store'
 
-var CloseButton = Backbone.View.extend({
+const CloseButton = Backbone.View.extend({
 
   className: 'fv-close-button',
 

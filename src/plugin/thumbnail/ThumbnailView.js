@@ -18,18 +18,18 @@ let ThumbnailView = Backbone.View.extend({
     this.listenTo(options.panelView, 'renderPanel', this.setSelected);
   },
   onThumbLoadError: function (ev) {
-    var el = $(ev.target);
+    const el = $(ev.target);
     el.parent().removeClass('has-thumbnail');
     el.remove();
   },
   render: function () {
-    var type = this.model.get('type'),
-      thumbnailSrc = this.model.get('thumbnail'),
-      isImage = fileTypes.isImage(type);
+    const type = this.model.get('type');
+    const thumbnailSrc = this.model.get('thumbnail');
+    const isImage = fileTypes.isImage(type);
 
-    var generateThumbnail = this._fileViewer.getConfig().generateThumbnail;
+    const generateThumbnail = this._fileViewer.getConfig().generateThumbnail;
 
-    var $thumbnail = $(_templateStore.get('placeholderThumbnail')({
+    const $thumbnail = $(_templateStore.get('placeholderThumbnail')({
       iconClass: getCssClass(type),
       title: this.model.get('title')
     }));
@@ -60,9 +60,9 @@ let ThumbnailView = Backbone.View.extend({
     event.preventDefault()
 
     this._fileViewer.showFileWithCID(this.model.cid).then(function () {
-      var contentView = this._fileViewer.getView().fileContentView
+      const contentView = this._fileViewer.getView().fileContentView
 
-      var currentView
+      let currentView
 
       if (contentView.isLayerInitialized('content')) {
         currentView = contentView.getLayerForName('content')._viewer
@@ -72,7 +72,7 @@ let ThumbnailView = Backbone.View.extend({
     }.bind(this)).always()
   },
   setSelected: function () {
-    var file = this._fileViewer._fileState.getCurrent()
+    const file = this._fileViewer._fileState.getCurrent()
     if (file === this.model) {
       this.$el.addClass('selected')
     } else if (this.$el.hasClass('selected')) {

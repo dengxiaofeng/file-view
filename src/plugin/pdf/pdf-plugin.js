@@ -134,7 +134,7 @@ const PDFView = BaseViewer.extend({
 
     this.listenTo(annotations, 'selected', function(item) {
       if (item) {
-        var pageNumber = item.attributes.pageNumber
+        let pageNumber = item.attributes.pageNumber
         if (pageNumber > that.viewer.pages.length) {
           pageNumber = that.viewer.pages.length
         }
@@ -147,7 +147,7 @@ const PDFView = BaseViewer.extend({
 
   _openViewer: function(pdfTransportFactory) {
     if (!window.ArrayBuffer) {
-      var err = new Error()
+      const err = new Error()
       err.title = '您的浏览器不能预览此文件。'
       err.description = '您必须下载该文件，或使用一个不同的浏览器进行查看。'
       err.icon = 'cp-pdf-icon'
@@ -160,15 +160,13 @@ const PDFView = BaseViewer.extend({
     }.bind(this)
 
     const viewerFailed = function(oldErr) {
-      var err = createPdfError(oldErr, this.model)
+      const err = createPdfError(oldErr, this.model)
       this.trigger('viewerFail', err)
     }.bind(this)
 
     const viewerSucceeded = function(pdfTransport) {
 
-      const defaultScale = pdfProperty[
-        presentationMode.active ? 'DEFAULT_SCALE_PRESENTATION' : 'DEFAULT_SCALE'
-        ]
+      const defaultScale = pdfProperty[presentationMode.active ? 'DEFAULT_SCALE_PRESENTATION' : 'DEFAULT_SCALE']
       const passwordLayer = this._fileViewer._view.fileContentView.getLayerForName('password')
       this.viewer.openFile(this._previewSrc, defaultScale, undefined, passwordLayer, pdfTransport)
         .then(function() {
@@ -226,7 +224,7 @@ const PDFView = BaseViewer.extend({
         x: pdfProperty.SCROLLBAR_PADDING,
         y: pdfProperty.VERTICAL_PADDING
       }
-      var arrowLayer = this._fileViewer.getView().fileContentView.getLayerForName('arrows')
+      const arrowLayer = this._fileViewer.getView().fileContentView.getLayerForName('arrows')
       if (arrowLayer.showsArrow()) {
         pagePadding.x = pdfProperty.NAVIGATION_ARROW_PADDING
       }
@@ -235,7 +233,6 @@ const PDFView = BaseViewer.extend({
   },
 
   setupMode: function(mode, isModeChanged) {
-    console.log('pdf mode', mode)
     if (mode === 'PRESENTATION') {
       presentationMode.active = true
       this._disableScroll()
@@ -252,8 +249,8 @@ const PDFView = BaseViewer.extend({
   },
 
   _scaleGraduallyToFitPage: function() {
-    var times = 0
-    var fullScreenInProgress = setInterval(function() {
+    let times = 0
+    const fullScreenInProgress = setInterval(function() {
       times++
       if (times === 11) {
         clearInterval(fullScreenInProgress)
@@ -271,7 +268,7 @@ const PDFView = BaseViewer.extend({
   annotationOptions: {
     dropTarget: '#viewer .page .annotationLayer',
     annotationCreated: function(elem) {
-      var $elem = $(elem)
+      const $elem = $(elem)
       return {
         pageNumber: parseInt($elem.closest('.page').attr('data-page-number'), 10)
       }

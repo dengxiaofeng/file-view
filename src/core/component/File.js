@@ -1,6 +1,6 @@
 import Backbone from 'backbone'
 
-var File = Backbone.Model.extend({
+const File = Backbone.Model.extend({
   defaults: {
     src: '',
     type: '',

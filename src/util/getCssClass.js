@@ -1,7 +1,7 @@
 import fileTypes from './FileType'
 
 export const getCssClass = function (type) {
-  var iconClass = 'cp-unknown-file-type-icon';
+  let iconClass = 'cp-unknown-file-type-icon';
   if (fileTypes.isImage(type)) {
     iconClass = 'cp-image-icon';
   } else if (fileTypes.isPDF(type)) {

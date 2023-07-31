@@ -23,9 +23,9 @@ import { _templateStore } from '../store/template-store'
 import templateBackend from '../store/template-backend'
 import moduleBackend from '../store/module-backend'
 
-var _modules = {}
+const _modules = {}
 Backbone.$=$
-var FileViewer = function (config) {
+const FileViewer = function (config) {
   config = _.defaults(config || {}, defaultsConfig);
   config.appendTo = config.appendTo || $('body');
   this.Templates = {}
@@ -256,7 +256,7 @@ FileViewer.prototype.isOpen = function () {
 
 FileViewer.prototype.showFileWithQuery = function (query) {
   this._fileState.setCurrentWithQuery(query);
-  var file = this._fileState.getCurrent();
+  const file = this._fileState.getCurrent();
   return this.showFile(file);
 };
 
@@ -291,7 +291,7 @@ FileViewer.prototype.setFiles = function (newFiles, nextFileQuery) {
 
 
 FileViewer.prototype.getCurrent = function () {
-  var currentFile = this._view.getCurrentFile();
+  const currentFile = this._view.getCurrentFile();
   return currentFile && currentFile.toJSON();
 };
 
@@ -371,7 +371,7 @@ FileViewer.prototype.showFileWithCID = function (cid) {
 };
 
 FileViewer.prototype.showFileWithId = function (id, ownerId) {
-  var fileQuery = {
+  const fileQuery = {
     id: id
   };
 
@@ -384,7 +384,7 @@ FileViewer.prototype.showFileWithId = function (id, ownerId) {
 
 
 FileViewer.prototype.showFileWithSrc = function (src) {
-  var fileQuery = {
+  const fileQuery = {
     src: src
   };
 
@@ -400,9 +400,9 @@ FileViewer.prototype.updateFiles = function (files, mapFn) {
   if (!(mapFn && _.isFunction(mapFn))) {
     this._files.reset(files);
   } else {
-    var newModels = _.chain(files)
+    const newModels = _.chain(files)
       .map(function (file) {
-        var matchedModel = this._files.find(function (collectionModel) {
+        const matchedModel = this._files.find(function (collectionModel) {
           return mapFn(collectionModel.toJSON()) === mapFn(file);
         });
         if (matchedModel) {
@@ -426,7 +426,7 @@ FileViewer.prototype.updateFiles = function (files, mapFn) {
 };
 
 FileViewer.prototype._showFile = function (file) {
-  var triggerEvent = function (event) {
+  const triggerEvent = function (event) {
     return function () {
       this.trigger(event, file);
     }.bind(this);

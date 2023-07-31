@@ -1,13 +1,13 @@
 import File from '../component/File'
 
 
-var rejectWithError = function (msg) {
+const rejectWithError = function (msg) {
   return new $.Deferred().reject(
     new Error(msg)
   ).promise();
 };
 
-var Commands = {};
+const Commands = {};
 
 Commands.LookupViewer = function (originalFile, viewerRegistry) {
   this._originalFile = originalFile;
@@ -15,7 +15,7 @@ Commands.LookupViewer = function (originalFile, viewerRegistry) {
 };
 
 Commands.LookupViewer.prototype.execute = function (previewSrc, previewType, overwrites) {
-  var convertedFile = new File(this._originalFile.toJSON());
+  const convertedFile = new File(this._originalFile.toJSON());
 
   convertedFile.set(overwrites);
 

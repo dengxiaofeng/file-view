@@ -26,8 +26,8 @@ var ButtonPresentationMode = videojs.Button.extend({
 
 ButtonPresentationMode.asPlugin = function (fileViewer) {
   return function (options) {
-    var player = this;
-    var button = new ButtonPresentationMode({
+    const player = this;
+    const button = new ButtonPresentationMode({
       player: player,
       fileViewer: fileViewer
     });

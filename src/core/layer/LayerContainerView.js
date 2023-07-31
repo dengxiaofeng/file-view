@@ -2,20 +2,20 @@ import _ from 'underscore'
 import Backbone from 'backbone'
 import ConstantsDictionary from '../global-api/constants-dictionary'
 
-var invoke = function (fn) {
+const invoke = function (fn) {
   return fn();
 };
 
-var pick = function (property, obj) {
+const pick = function (property, obj) {
   return obj[ property ];
 };
 
-var pickBoundFn = function (property, obj) {
+const pickBoundFn = function (property, obj) {
   return _.isFunction(obj[ property ]) && obj[ property ].bind(obj);
 };
 
 
-var FileContentLayerView = Backbone.View.extend({
+const FileContentLayerView = Backbone.View.extend({
 
 
   initialize: function (options) {
@@ -73,11 +73,11 @@ var FileContentLayerView = Backbone.View.extend({
 
     this._layers = this._layerViewRegistrations
       .filter(function (registration) {
-        var isInSubset = (names.indexOf(registration.name) !== -1);
+        const isInSubset = (names.indexOf(registration.name) !== -1);
         return isInSubset && registration.predicate(this._fileViewer);
       }, this)
       .map(function (registration) {
-        var view = new registration.LayerView({
+        const view = new registration.LayerView({
           contentLayerView: this,
           fileViewer: this._fileViewer
         });
@@ -138,11 +138,9 @@ var FileContentLayerView = Backbone.View.extend({
   getLayerForName: function (name) {
 
 
-    var layer = _.find(this._layers, function (layer) {
+    const layer = _.find(this._layers, function (layer) {
       return layer.name === name;
     });
-
-
 
     return layer.view;
   },

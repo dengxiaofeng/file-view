@@ -1,7 +1,7 @@
 import Backbone from 'backbone'
 import { _templateStore } from '../store/template-store'
 
-var ArrowLayer = Backbone.View.extend({
+const ArrowLayer = Backbone.View.extend({
 
   className: 'cp-arrow-layer',
 

@@ -1,4 +1,4 @@
-var SCALE = {
+const SCALE = {
   PAGE_WIDTH: 'page-width',
   PAGE_HEIGHT: 'page-height',
   PAGE_FIT: 'page-fit',

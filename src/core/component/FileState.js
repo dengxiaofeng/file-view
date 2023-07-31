@@ -1,6 +1,6 @@
 import Backbone from 'backbone'
 
-var FileState = Backbone.Model.extend({
+const FileState = Backbone.Model.extend({
   defaults: {
     currentFileIndex: -1,
     isNewFileUploaded: false
@@ -11,7 +11,7 @@ var FileState = Backbone.Model.extend({
   },
 
   setNext: function () {
-    var currentFileIndex = this.get('currentFileIndex');
+    const currentFileIndex = this.get('currentFileIndex');
     if (currentFileIndex < (this.collection.length - 1)) {
       this.set({
         currentFileIndex: this.get('currentFileIndex') + 1
@@ -24,7 +24,7 @@ var FileState = Backbone.Model.extend({
   },
 
   setPrev: function () {
-    var currentFileIndex = this.get('currentFileIndex');
+    const currentFileIndex = this.get('currentFileIndex');
     if (currentFileIndex > 0) {
       this.set({
         currentFileIndex: this.get('currentFileIndex') - 1
@@ -61,7 +61,7 @@ var FileState = Backbone.Model.extend({
 
   selectWhere: function (selector) {
     if (selector) {
-      var selected = this.collection.findWhere(selector);
+      const selected = this.collection.findWhere(selector);
       if (selected) {
         this.setCurrentWithCID(selected.cid);
       }
@@ -71,7 +71,7 @@ var FileState = Backbone.Model.extend({
   },
 
   replaceCurrent: function (file) {
-    var idx = this.get('currentFileIndex');
+    const idx = this.get('currentFileIndex');
     this.collection.remove(this.collection.at(idx));
     this.collection.add(file, {
       at: idx
@@ -79,7 +79,7 @@ var FileState = Backbone.Model.extend({
   },
 
   setCurrentWithQuery: function (query) {
-    var file = this.collection.findWhere(query);
+    const file = this.collection.findWhere(query);
 
     if (file) {
       this.setCurrentWithCID(file.cid);

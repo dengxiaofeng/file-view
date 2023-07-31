@@ -1,14 +1,14 @@
 import Backbone from 'backbone'
 import {_templateStore} from '../store/template-store';
 
-var SPINNER_SIZE = 'large';
-var SPINNER_STYLE = {
+const SPINNER_SIZE = 'large';
+const SPINNER_STYLE = {
   color: '#fff',
   zIndex: 'auto'
 };
 
 
-var SpinnerLayer = Backbone.View.extend({
+const SpinnerLayer = Backbone.View.extend({
 
   className: 'cp-spinner-layer',
 

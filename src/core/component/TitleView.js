@@ -2,14 +2,14 @@ import Backbone from 'backbone'
 import { getCssClass } from '../../util/getCssClass';
 import {_templateStore} from '../store/template-store';
 
-var TitleView = Backbone.View.extend({
+const TitleView = Backbone.View.extend({
 
   initialize: function (options) {
     this._fileViewer = options.fileViewer;
   },
 
   render: function () {
-    var model = this._fileViewer.getCurrentFile();
+    const model = this._fileViewer.getCurrentFile();
     if (!model) {
       return;
     }

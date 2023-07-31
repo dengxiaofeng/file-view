@@ -1,7 +1,7 @@
 import $ from 'jquery'
 import _ from 'underscore'
 
-var ModuleStore = function () {
+const ModuleStore = function () {
   this._backend = null;
 };
 

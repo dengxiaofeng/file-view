@@ -1,7 +1,7 @@
 import Backbone from 'backbone'
 import ConstantsDictionary from '../global-api/constants-dictionary'
 
-var PanelContainerView = Backbone.View.extend({
+const PanelContainerView = Backbone.View.extend({
 
   className: 'panel-view',
 
@@ -40,7 +40,7 @@ var PanelContainerView = Backbone.View.extend({
     name = name || this._lastAddedPanelName;
 
 
-    var PanelView = this._panelViewsByName.lookup(name);
+    const PanelView = this._panelViewsByName.lookup(name);
 
     this._currentPanelName = name;
     this._currentPanel = new PanelView({
@@ -83,7 +83,7 @@ var PanelContainerView = Backbone.View.extend({
       return;
     }
 
-    var previousPanel = this.getInitializedPanelName();
+    const previousPanel = this.getInitializedPanelName();
     this.teardownPanel();
     this.initializePanel(previousPanel);
   },

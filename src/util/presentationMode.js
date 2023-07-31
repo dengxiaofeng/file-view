@@ -1,7 +1,7 @@
 import $ from 'jquery'
 
-var requestFullscreen = function () {
-  var fullscreenContainer = $('#cp-file-body')[ 0 ];
+const requestFullscreen = function () {
+  const fullscreenContainer = $('#cp-file-body')[ 0 ];
 
   if (fullscreenContainer.requestFullscreen) {
     fullscreenContainer.requestFullscreen();
@@ -14,7 +14,7 @@ var requestFullscreen = function () {
   }
 };
 
-var cancelFullscreen = function () {
+const cancelFullscreen = function () {
   if (document.cancelFullscreen) {
     document.cancelFullscreen();
   } else if (document.mozCancelFullScreen) {
@@ -26,7 +26,7 @@ var cancelFullscreen = function () {
   }
 };
 
-var isFullscreen = function () {
+const isFullscreen = function () {
   return (document.fullscreenElement ||
     document.mozFullScreen ||
     document.webkitIsFullScreen ||
@@ -34,7 +34,7 @@ var isFullscreen = function () {
 };
 
 
-var onFullscreenChange = function (e) {
+const onFullscreenChange = function (e) {
   if (!isFullscreen() && !this.isInMode('BASE')) {
     this._fileViewer.analytics.send('files.fileviewer-web.presentation.exit', {
       actionType: 'hotkey'
@@ -43,13 +43,13 @@ var onFullscreenChange = function (e) {
   }
 };
 
-var presentationMode = {
+const presentationMode = {
 
   activateHook: function (mainView) {
     $(document).on(
       'fullscreenchange webkitfullscreenchange mozfullscreenchange MSFullscreenChange',
       onFullscreenChange.bind(mainView));
-    var $arrowLayer = mainView.fileContentView.getLayerForName('arrows').$el;
+    const $arrowLayer = mainView.fileContentView.getLayerForName('arrows').$el;
     $arrowLayer.toggle(this.showsArrowLayer);
   },
 
@@ -85,7 +85,7 @@ var presentationMode = {
 
   _handleKeys: function (e) {
     e.preventDefault();
-    var contentView, viewer;
+    let contentView, viewer;
 
     if (this.fileContentView.isLayerInitialized('content')) {
       contentView = this.fileContentView.getLayerForName('content');

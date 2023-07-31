@@ -3,7 +3,7 @@ import _ from 'underscore'
 import BaseViewer from '../component/BaseViewer'
 import {_templateStore} from '../store/template-store';
 
-var ImageView = BaseViewer.extend({
+const ImageView = BaseViewer.extend({
   id: 'cp-image-preview',
   tagName: 'div',
   initialize: function () {
@@ -17,8 +17,8 @@ var ImageView = BaseViewer.extend({
     this._isFitHeight = false;
   },
   renderAnnotations: function (PinsView) {
-    var current = this._fileViewer.getCurrentFile();
-    var annotations = current.get('annotations');
+    const current = this._fileViewer.getCurrentFile();
+    const annotations = current.get('annotations');
     if (current && PinsView) {
       this.pinsView = new PinsView({
         fileViewer: this._fileViewer,
@@ -29,7 +29,7 @@ var ImageView = BaseViewer.extend({
     }
 
     annotations.on('selected', function (item) {
-      var $pin, positionTop, positionLeft;
+      let $pin, positionTop, positionLeft;
       if (!item) {
         return;
       }
@@ -50,14 +50,14 @@ var ImageView = BaseViewer.extend({
     }.bind(this));
   },
   bindPanEvents: function () {
-    var previous = {
+    let previous = {
         x: 0,
         y: 0
       },
       view = this;
 
-    var scroll = function (e) {
-      var $el = view.$el;
+    const scroll = function (e) {
+      const $el = view.$el;
       $el.scrollLeft($el.scrollLeft() + previous.x - e.clientX);
       $el.scrollTop($el.scrollTop() + previous.y - e.clientY);
       previous = {
@@ -67,13 +67,13 @@ var ImageView = BaseViewer.extend({
       e.preventDefault();
     };
 
-    var unpan = function (e) {
+    const unpan = function (e) {
       view.$el.off('mousemove', '#cp-img', scroll);
       view.$image.removeClass('panning');
       e.preventDefault();
     };
 
-    var pan = function (e) {
+    const pan = function (e) {
       $(window).one('mouseup', unpan);
       view.$el.on('mousemove', '#cp-img', scroll);
       view.$image.addClass('panning');
@@ -97,27 +97,25 @@ var ImageView = BaseViewer.extend({
     }
   },
   _fixContainerSize: function () {
-    var $container = this.$el.find('.hc-image-container');
-    var $image = this.$el.find('#cp-img');
+    const $container = this.$el.find('.hc-image-container');
+    const $image = this.$el.find('#cp-img');
     $container.width($image.width());
     $container.height($image.height());
   },
   _isImageBiggerThanViewport: function () {
-    return this._isImageWiderThanViewport() ||
-      this._isImageHigherThanViewport();
+    return this._isImageWiderThanViewport() || this._isImageHigherThanViewport();
   },
   _isImageWiderThanViewport: function () {
-    var viewportWidth = this.$el.width();
+    const viewportWidth = this.$el.width();
     return this.imageWidth > viewportWidth;
   },
   _isImageHigherThanViewport: function () {
-    var viewportHeight = this.$el.height();
+    const viewportHeight = this.$el.height();
     return this.imageHeight > viewportHeight;
   },
 
   _isZoomedToPageFit: function () {
-    return this.$el.width() === this.$image.width() ||
-      this.$el.height() === this.$image.height();
+    return this.$el.width() === this.$image.width() || this.$el.height() === this.$image.height();
   },
 
   _stopFit: function () {
@@ -129,8 +127,8 @@ var ImageView = BaseViewer.extend({
     if (this._rescaleForFullScreen) {
       return;
     }
-    var scalePercentage = Math.round(parseInt(scale * 100, 10));
-    var $scaleInfo = this.$el.find('.cp-scale-info');
+    const scalePercentage = Math.round(parseInt(scale * 100, 10));
+    const $scaleInfo = this.$el.find('.cp-scale-info');
     $scaleInfo.text(scalePercentage + '%');
     $scaleInfo
       .stop(true, true)
@@ -140,13 +138,13 @@ var ImageView = BaseViewer.extend({
   },
 
   zoomIn: function () {
-    var scaleFactor = (this.$image.width() / this.imageWidth) * this.ZOOM_IN_FACTOR;
+    const scaleFactor = (this.$image.width() / this.imageWidth) * this.ZOOM_IN_FACTOR;
     this._stopFit();
     this.changeScale(scaleFactor);
   },
 
   zoomOut: function () {
-    var scaleFactor = (this.$image.width() / this.imageWidth) * this.ZOOM_OUT_FACTOR;
+    const scaleFactor = (this.$image.width() / this.imageWidth) * this.ZOOM_OUT_FACTOR;
     this._stopFit();
     this.changeScale(scaleFactor);
   },
@@ -170,8 +168,8 @@ var ImageView = BaseViewer.extend({
   },
 
   _zoomPageFit: function () {
-    var viewportWidth = this.$el.width();
-    var viewportHeight = this.$el.height();
+    const viewportWidth = this.$el.width();
+    const viewportHeight = this.$el.height();
 
     if ((viewportWidth / this.imageWidth) > (viewportHeight / this.imageHeight)) {
       this.zoomHeight();
@@ -181,16 +179,16 @@ var ImageView = BaseViewer.extend({
   },
 
   zoomWidth: function () {
-    var viewportWidth = this.$el.width();
-    var scaleFactor = viewportWidth / this.imageWidth;
+    const viewportWidth = this.$el.width();
+    const scaleFactor = viewportWidth / this.imageWidth;
     this.changeScale(scaleFactor);
     this._stopFit();
     this._isFitWidth = true;
   },
 
   zoomHeight: function () {
-    var viewportHeight = this.$el.height();
-    var scaleFactor = viewportHeight / this.imageHeight;
+    const viewportHeight = this.$el.height();
+    const scaleFactor = viewportHeight / this.imageHeight;
     this.changeScale(scaleFactor);
     this._stopFit();
     this._isFitHeight = true;
@@ -203,21 +201,21 @@ var ImageView = BaseViewer.extend({
 
 
   changeScale: function (scale) {
-    var viewportWidth = this.$el.width();
-    var viewportHeight = this.$el.height();
+    const viewportWidth = this.$el.width();
+    const viewportHeight = this.$el.height();
 
-    var oldWidth = this.$image.width();
-    var oldHeight = this.$image.height();
-    var containerPosition = this.$el.find('.cp-image-container').position();
+    const oldWidth = this.$image.width();
+    const oldHeight = this.$image.height();
+    const containerPosition = this.$el.find('.cp-image-container').position();
 
-    var oldPixelCentreWidth = (viewportWidth / 2) + Math.abs(containerPosition.left);
-    var oldPixelCentreHeight = (viewportHeight / 2) + Math.abs(containerPosition.top);
+    const oldPixelCentreWidth = (viewportWidth / 2) + Math.abs(containerPosition.left);
+    const oldPixelCentreHeight = (viewportHeight / 2) + Math.abs(containerPosition.top);
 
     this.$image.css('width', this.imageWidth * scale);
     this.$image.css('height', this.imageHeight * scale);
 
-    var newPixelCentreWidth = (oldPixelCentreWidth / oldWidth) * this.$image.width();
-    var newPixelCentreHeight = (oldPixelCentreHeight / oldHeight) * this.$image.height();
+    const newPixelCentreWidth = (oldPixelCentreWidth / oldWidth) * this.$image.width();
+    const newPixelCentreHeight = (oldPixelCentreHeight / oldHeight) * this.$image.height();
 
     this.$el.scrollLeft(newPixelCentreWidth - (viewportWidth / 2));
     this.$el.scrollTop(newPixelCentreHeight - (viewportHeight / 2));
@@ -265,7 +263,7 @@ var ImageView = BaseViewer.extend({
   },
 
   addImage: function () {
-    var $img = $('<img/>')
+    const $img = $('<img/>')
       .attr('id', 'cp-img')
       .attr('src', this._previewSrc)
       .attr('alt', this.model.get('title'));
@@ -276,9 +274,8 @@ var ImageView = BaseViewer.extend({
       this.trigger('viewerReady');
     }.bind(this));
     $img.on('error', function () {
-      var err = new Error('Image failed loading');
-      err.title =
-        "\u54ce\u54df\uff01\u6211\u4eec\u4e0d\u80fd\u52a0\u8f7d\u56fe\u50cf\u3002";
+      const err = new Error('Image failed loading');
+      err.title = "\u54ce\u54df\uff01\u6211\u4eec\u4e0d\u80fd\u52a0\u8f7d\u56fe\u50cf\u3002";
       err.description = this.model.get('src');
       err.icon = 'cp-image-icon';
       this.trigger('viewerFail', err);
@@ -290,7 +287,7 @@ var ImageView = BaseViewer.extend({
   },
 
   scaleAndAppendImage: function (view) {
-    var $image = $(this);
+    const $image = $(this);
 
     view.imageHeight = this.height;
     view.imageWidth = this.width;
@@ -298,7 +295,7 @@ var ImageView = BaseViewer.extend({
 
     $image.css('display', 'none');
 
-    var $imageContainer = view.$el.find('.cp-image-container');
+    const $imageContainer = view.$el.find('.cp-image-container');
     $imageContainer.append(view.$image);
     $imageContainer.addClass('cp-annotatable');
     view.zoomAuto();
@@ -314,7 +311,7 @@ var ImageView = BaseViewer.extend({
     }
   },
   scaleGraduallyToFit: function () {
-    var times = 0;
+    let times = 0;
     this._rescaleForFullScreen = true;
     this._fullScreenInProgress = setInterval(function () {
       times++;

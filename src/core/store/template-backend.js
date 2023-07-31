@@ -2,9 +2,9 @@
 //getNestedProperty(obj, 'a.b.c') -> 'x'
 
 
-var getNestedProperty = function (obj, prop) {
-  var levels = prop.split('.');
-  var i;
+const getNestedProperty = function (obj, prop) {
+  const levels = prop.split('.');
+  let i;
   for (i = 0; i < levels.length; i++) {
     obj = obj[ levels[ i ] ];
   }

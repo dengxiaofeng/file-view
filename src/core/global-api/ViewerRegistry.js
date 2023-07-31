@@ -1,13 +1,13 @@
 import _ from 'underscore'
 
-var createMatchFn = function (expected) {
+const createMatchFn = function (expected) {
   return function (current) {
     return current === expected;
   };
 };
 
 
-var ViewerRegistry = function () {
+const ViewerRegistry = function () {
   this._handlers = [];
 };
 
@@ -37,7 +37,7 @@ ViewerRegistry.prototype.register = function (fileType, previewer, weight) {
 
 
 ViewerRegistry.prototype.get = function (fileType) {
-  var handler = _.find(this._handlers, function (handler) {
+  const handler = _.find(this._handlers, function (handler) {
     return handler.matchesFileType(fileType);
   });
 

@@ -1,10 +1,10 @@
-import Backbone from 'Backbone'
+import Backbone from 'backbone'
 import $ from 'jquery'
 import ThumbnailView from './ThumbnailView'
 import { _templateStore } from '../../core/store/template-store';
 
 
-var FileMinimodeView = Backbone.View.extend({
+const FileMinimodeView = Backbone.View.extend({
   id: 'cp-footer-minimode',
   initialize: function (options) {
     this.subviews = []
@@ -26,7 +26,7 @@ var FileMinimodeView = Backbone.View.extend({
   render: function () {
     this.closeOldSubviews()
     this.collection.each(function (model) {
-      var view = new ThumbnailView({
+      const view = new ThumbnailView({
         model: model,
         fileViewer: this._fileViewer,
         panelView: this._panelView
@@ -37,10 +37,10 @@ var FileMinimodeView = Backbone.View.extend({
     return this
   },
   scrollToSelected: function () {
-    var file = this._fileViewer.getCurrentFile()
+    const file = this._fileViewer.getCurrentFile()
     this.subviews.forEach(function (view) {
       if (view.model === file) {
-        var topPos = view.$el.get(0).offsetTop - 59
+        const topPos = view.$el.get(0).offsetTop - 59
 
 
         if (topPos && this.$el.scrollTop !== topPos) {
@@ -50,9 +50,9 @@ var FileMinimodeView = Backbone.View.extend({
     }.bind(this))
   },
   _forceChromeRepaint: function () {
-    var $img = $('#cp-img')
+    const $img = $('#cp-img')
     if ($img.length) {
-      var $preview = $img.closest('#cp-image-preview'),
+      let $preview = $img.closest('#cp-image-preview'),
         left = $preview.scrollLeft(),
         top = $preview.scrollTop()
 

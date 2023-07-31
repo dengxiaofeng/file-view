@@ -1,4 +1,4 @@
-var keys = {
+const keys = {
   F: 70,
   G: 71,
   P: 80,
@@ -19,9 +19,9 @@ var keys = {
   TAB: 9
 };
 
-var createConditionalKeyHandler = function (fn) {
+const createConditionalKeyHandler = function (fn) {
   return function (event) {
-    var targetTagName = event.target.tagName && event.target.tagName.toUpperCase();
+    const targetTagName = event.target.tagName && event.target.tagName.toUpperCase();
     if (targetTagName !== 'INPUT' && targetTagName !== 'TEXTAREA') {
       return fn.call(this, event);
     }

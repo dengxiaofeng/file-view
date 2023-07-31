@@ -22,14 +22,14 @@ import { _templateStore } from '../store/template-store'
 import { keys, createConditionalKeyHandler } from '../../constant/keyboard'
 
 
-var rejectWithError = function (msg) {
+const rejectWithError = function (msg) {
   return new $.Deferred().reject(
     new Error(msg)
   ).promise();
 };
 
 
-var MainView = Backbone.View.extend({
+const MainView = Backbone.View.extend({
   attributes: function () {
     return {
       'id': 'cp-container-' + this.model.get('instanceId'),
@@ -39,7 +39,7 @@ var MainView = Backbone.View.extend({
     }
   },
   initialize: function (params) {
-    var options = _.extend({}, params)
+    const options = _.extend({}, params)
     this._fileViewer = options.model.get('fileViewer')
 
     this._currentFile = null;
@@ -233,8 +233,8 @@ var MainView = Backbone.View.extend({
           // var isPreviewGenerated = this._fileViewer.getConfig()
           //   .isPreviewGenerated;
 
-          var isPreviewGenerated = this.isPreviewGenerated
-          var generatePreview = this.generatePreview
+          const isPreviewGenerated = this.isPreviewGenerated
+          const generatePreview = this.generatePreview
 
 
           if (this._fileViewer.supports(file.get('type'))) {
@@ -270,10 +270,10 @@ var MainView = Backbone.View.extend({
         }.bind(this))
           .pipe(lookupViewerCommand.execute.bind(lookupViewerCommand))
           .pipe(function createViewer(Viewer, previewSrc, convertedFile) {
-            var readyDeferred = new $.Deferred();
+            const readyDeferred = new $.Deferred();
 
             if (Viewer) {
-              var view = new Viewer({
+              const view = new Viewer({
                 previewSrc: previewSrc,
                 model: new File(convertedFile.toJSON()),
                 fileViewer: this._fileViewer
@@ -324,10 +324,10 @@ var MainView = Backbone.View.extend({
     return fileViewed.promise();
   },
   isPreviewGenerated: function (fileView, config) {
-    var id = config.get('id')
+    const id = config.get('id')
     // console.log(this._fileViewer.getConfig().convertServer)
-    var buildURL = fileView.getConfig().buildURL
-    var deferred = $.Deferred()
+    const buildURL = fileView.getConfig().buildURL
+    const deferred = $.Deferred()
     if (!id) {
       return $.when(true, config.get('src'), config.get('type'))
     }
@@ -347,7 +347,7 @@ var MainView = Backbone.View.extend({
     return deferred.promise()
   },
   generatePreview: function (config) {
-    var deferred = $.Deferred()
+    const deferred = $.Deferred()
     deferred.resolve()
     return deferred.promise()
   },
@@ -402,8 +402,8 @@ var MainView = Backbone.View.extend({
     this._focusManager.releaseFocus();
   },
   _handleNavigationKeys: function (e) {
-    var numFiles = this._fileViewer._files.length;
-    var usedModifierKey = e.altKey || e.ctrlKey || e.metaKey || e.shiftKey;
+    const numFiles = this._fileViewer._files.length;
+    const usedModifierKey = e.altKey || e.ctrlKey || e.metaKey || e.shiftKey;
 
     if (e.which === keys.ESCAPE && !this.isNavigationLocked()) {
       e.preventDefault();
@@ -465,11 +465,11 @@ var MainView = Backbone.View.extend({
     }
   },
   _onClickToBackground: function (e) {
-    var mode = this._fileViewer._view._modes[ this._fileViewer._view._mode ];
+    const mode = this._fileViewer._view._modes[ this._fileViewer._view._mode ];
     if (mode.disableClickBackgroundCloses) {
       return;
     }
-    var backgroundLayers = [
+    const backgroundLayers = [
       'cp-error-layer',
       'cp-waiting-layer',
       'cp-password-layer'
@@ -494,15 +494,15 @@ var MainView = Backbone.View.extend({
   },
 
   _updateMetaBannerHeight: function () {
-    var showsMetaView = this.fileMetaView.countInitializedLayers() > 0;
+    const showsMetaView = this.fileMetaView.countInitializedLayers() > 0;
     this.fileContentView.$el.toggleClass('meta-banner', showsMetaView);
     this.fileSidebarView.$el.toggleClass('meta-banner', showsMetaView);
   },
 
   _resizeActiveViewer: function () {
     if (this.fileContentView.isLayerInitialized('content')) {
-      var contentView = this.fileContentView.getLayerForName('content');
-      var viewer = contentView.getAttachedViewer();
+      const contentView = this.fileContentView.getLayerForName('content');
+      const viewer = contentView.getAttachedViewer();
       if (viewer) {
         viewer.handleResize();
       }
@@ -510,7 +510,7 @@ var MainView = Backbone.View.extend({
   },
 
   _fixTooltipCleanup: function () {
-    var removeAllTooltips = function () {
+    const removeAllTooltips = function () {
       $('.tipsy').remove();
     };
     this._fileViewer.on('fv.changeFile', removeAllTooltips);
@@ -525,15 +525,15 @@ var MainView = Backbone.View.extend({
   },
 
   setupMode: function (mode) {
-    var toolbar = this.fileContentView.getLayerForName('toolbar');
-    var viewer = toolbar._viewer;
-    var $arrowLayer = this.fileContentView.getLayerForName('arrows').$el;
+    const toolbar = this.fileContentView.getLayerForName('toolbar');
+    const viewer = toolbar._viewer;
+    const $arrowLayer = this.fileContentView.getLayerForName('arrows').$el;
 
-    var lastMode = this._mode;
-    var isModeChanged = (lastMode !== mode);
+    const lastMode = this._mode;
+    const isModeChanged = (lastMode !== mode);
 
-    var modeObj = this._modes[ mode ];
-    var lastModeObj = this._modes[ lastMode ];
+    const modeObj = this._modes[ mode ];
+    const lastModeObj = this._modes[ lastMode ];
 
     if (isModeChanged) {
       this._deactivateModeHook();
@@ -557,27 +557,27 @@ var MainView = Backbone.View.extend({
   },
 
   _activateModeHook: function () {
-    var mode = this._modes[ this._mode ];
+    const mode = this._modes[ this._mode ];
     if (mode.activateHook) {
       mode.activateHook(this);
     }
   },
 
   _deactivateModeHook: function () {
-    var mode = this._modes[ this._mode ];
+    const mode = this._modes[ this._mode ];
     if (mode.deactivateHook) {
       mode.deactivateHook(this);
     }
   },
   updatePaginationButtons: function () {
     if (this.isInMode('PRESENTATION')) {
-      var toolbar = this.fileContentView.getLayerForName('toolbar');
+      const toolbar = this.fileContentView.getLayerForName('toolbar');
       if (!toolbar._viewer) {
         return;
       }
 
-      var $toolbarPrevPage = toolbar.$el.find('.cp-toolbar-prev-page');
-      var $toolbarNextPage = toolbar.$el.find('.cp-toolbar-next-page');
+      const $toolbarPrevPage = toolbar.$el.find('.cp-toolbar-prev-page');
+      const $toolbarNextPage = toolbar.$el.find('.cp-toolbar-next-page');
 
       $toolbarPrevPage.toggleClass('inactive', false);
       $toolbarNextPage.toggleClass('inactive', false);
@@ -606,9 +606,9 @@ MainView._needsToRerenderContent = function (fileA, fileB) {
   if (!fileA || !fileB) {
     return true;
   }
-  var didTypeChange = fileA.get('type') !== fileB.get('type');
-  var didSrcChange = fileA.get('src') !== fileB.get('src');
-  var didThumbChange = fileA.get('thumbnail') !== fileB.get('thumbnail');
+  const didTypeChange = fileA.get('type') !== fileB.get('type');
+  const didSrcChange = fileA.get('src') !== fileB.get('src');
+  const didThumbChange = fileA.get('thumbnail') !== fileB.get('thumbnail');
   return didTypeChange || didSrcChange || didThumbChange;
 };
 

@@ -1,8 +1,8 @@
-var updateHash = (pre, cur) => {
+const updateHash = (pre, cur) => {
   return (prev << 5) + prev + curr;
 }
 
-var toCharCode = (str) => {
+const toCharCode = (str) => {
   return str.charCodeAt(0);
 }
 
@@ -26,12 +26,12 @@ export const addQueryParamToUrl = (url, param) => {
 }
 
 export const parseQueryString = (query) => {
-  var parts = query.split('&');
-  var params = {};
-  for (var i = 0, ii = parts.length; i < ii; ++i) {
-    var param = parts[ i ].split('=');
-    var key = param[ 0 ].toLowerCase();
-    var value = param.length > 1 ? param[ 1 ] : null;
+  const parts = query.split('&');
+  const params = {};
+  for (let i = 0, ii = parts.length; i < ii; ++i) {
+    const param = parts[ i ].split('=');
+    const key = param[ 0 ].toLowerCase();
+    const value = param.length > 1 ? param[ 1 ] : null;
     params[ decodeURIComponent(key) ] = decodeURIComponent(value);
   }
   return params;

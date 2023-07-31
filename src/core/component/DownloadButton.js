@@ -1,7 +1,7 @@
 import Backbone from 'backbone'
 import {_templateStore} from '../store/template-store';
 
-var DownloadButton = Backbone.View.extend({
+const DownloadButton = Backbone.View.extend({
   tagName: 'span',
   events: {
     'click': '_triggerAnalytics'
@@ -25,7 +25,7 @@ var DownloadButton = Backbone.View.extend({
   }
 }, {
   isDownloadable: function (fileViewer) {
-    var file = fileViewer.getCurrentFile();
+    const file = fileViewer.getCurrentFile();
     return file && file.get('downloadable');
   }
 })

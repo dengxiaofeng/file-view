@@ -1,11 +1,11 @@
-var hasFocusOverride = function (element) {
+const hasFocusOverride = function (element) {
   if (!element || !element.hasAttribute) {
     return false;
   }
   return element.hasAttribute('data-fv-allow-focus') || hasFocusOverride(element.parentElement);
 };
 
-var FocusManager = function ($el) {
+const FocusManager = function ($el) {
   this.$container = $el;
   this._handler = this._focusHandler.bind(this);
 };

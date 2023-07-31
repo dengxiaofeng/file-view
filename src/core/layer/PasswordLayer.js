@@ -3,26 +3,26 @@ import $ from 'jquery'
 import { keys } from '../../constant/keyboard';
 import { _templateStore } from '../store/template-store';
 
-var pdfjsPasswordResponses = {
+const pdfjsPasswordResponses = {
   NEED_PASSWORD: 1,
   INCORRECT_PASSWORD: 2
 };
 
-var fullscreenEvents = [
+const fullscreenEvents = [
   'fullscreenchange',
   'webkitfullscreenchange',
   'mozfullscreenchange',
   'MSFullscreenChange'
 ].join(' ');
 
-var isFullscreen = function () {
+const isFullscreen = function () {
   return (document.fullscreenElement ||
     document.mozFullScreen ||
     document.webkitIsFullScreen ||
     document.msFullscreenElement);
 };
 
-var PasswordLayer = Backbone.View.extend({
+const PasswordLayer = Backbone.View.extend({
 
   className: 'cp-password-layer',
 

@@ -1,7 +1,7 @@
 import $ from 'jquery'
 import UnknownFileTypeView from '../component/UnknownFileTypeView'
 
-var unknownFileTypeViewProvider = function () {
+const unknownFileTypeViewProvider = function () {
   return $.Deferred().resolve(UnknownFileTypeView);
 }
 

@@ -1,5 +1,5 @@
 import $ from 'jquery'
-var InstanceManager = function (createFn, destroyFn) {
+const InstanceManager = function (createFn, destroyFn) {
   this._createFn = createFn;
   this._destroyFn = destroyFn;
   this._instance = null;
@@ -7,9 +7,9 @@ var InstanceManager = function (createFn, destroyFn) {
 };
 
 InstanceManager.prototype.create = function () {
-  var args = arguments;
-  var d = new $.Deferred();
-  var destroyPromise = (this._destroyDeferred && this._destroyDeferred.promise()) || $.when();
+  const args = arguments;
+  const d = new $.Deferred();
+  const destroyPromise = (this._destroyDeferred && this._destroyDeferred.promise()) || $.when();
 
   destroyPromise.then(function () {
     this._destroyDeferred = new $.Deferred();

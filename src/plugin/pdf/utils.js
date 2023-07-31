@@ -3,22 +3,22 @@ export const approximateFraction = function roundToDivide(x) {
   if (Math.floor(x) === x) {
     return [ x, 1 ];
   }
-  var xinv = 1 / x;
-  var limit = 8;
+  let xinv = 1 / x;
+  let limit = 8;
   if (xinv > limit) {
     return [ 1, limit ];
   } else if (Math.floor(xinv) === xinv) {
     return [ 1, xinv ];
   }
 
-  var x_ = x > 1 ? xinv : x;
+  let x_ = x > 1 ? xinv : x;
   // a/b and c/d are neighbours in Farey sequence.
-  var a = 0, b = 1, c = 1, d = 1;
+  let a = 0, b = 1, c = 1, d = 1;
   // Limiting search to order 8.
 
   while (true) {
     // Generating next term in sequence (order of q).
-    var p = a + c, q = b + d;
+    let p = a + c, q = b + d;
     if (q > limit) {
       break;
     }
@@ -40,18 +40,18 @@ export const approximateFraction = function roundToDivide(x) {
 }
 
 export const roundToDivide = function roundToDivide(x, div) {
-  var r = x % div;
+  const r = x % div;
   return r === 0 ? x : Math.round(x - r + div);
 };
 
 export const getOutputScale = function getOutputScale(ctx) {
-  var devicePixelRatio = window.devicePixelRatio || 1;
-  var backingStoreRatio = ctx.webkitBackingStorePixelRatio ||
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  const backingStoreRatio = ctx.webkitBackingStorePixelRatio ||
     ctx.mozBackingStorePixelRatio ||
     ctx.msBackingStorePixelRatio ||
     ctx.oBackingStorePixelRatio ||
     ctx.backingStorePixelRatio || 1;
-  var pixelRatio = devicePixelRatio / backingStoreRatio;
+  const pixelRatio = devicePixelRatio / backingStoreRatio;
   return {
     sx: pixelRatio,
     sy: pixelRatio,

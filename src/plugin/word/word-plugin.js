@@ -20,7 +20,6 @@ const wordPlugin = BaseViewer.extend({
   //   this.viewer.zoomOut()
   // },
   render() {
-    console.log("this", this);
     this.$el.show().html(_templateStore.get('waitingMessage')({
       src: '',
       header: '您的预览即将出现!',

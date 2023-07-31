@@ -3,7 +3,7 @@ import fileTypes from '../../util/FileType'
 import { getCssClass } from '../../util/getCssClass'
 import { _templateStore } from '../store/template-store'
 
-var ThumbnailView = Backbone.View.extend({
+const ThumbnailView = Backbone.View.extend({
   className: 'cp-thumbnail',
   tagName: 'li',
   events: {
@@ -17,8 +17,8 @@ var ThumbnailView = Backbone.View.extend({
   jumpToFile: function (event) {
     event.preventDefault()
     this._fileViewer.showFileWithCID(this.model.cid).then(function () {
-      var contentView = this._fileViewer.getView().fileContentView
-      var currentView
+      const contentView = this._fileViewer.getView().fileContentView
+      let currentView;
       if (contentView.isLayerInitialized('content')) {
         currentView = contentView.getLayerForName('content')._viewer
         currentView && currentView.play && currentView.play()
@@ -28,7 +28,7 @@ var ThumbnailView = Backbone.View.extend({
     )
   },
   setSelected: function () {
-    var file = this._fileViewer._fileState.getCurrent();
+    const file = this._fileViewer._fileState.getCurrent();
     if (file === this.model) {
       this.$el.addClass('selected');
     } else if (this.$el.hasClass('selected')) {
@@ -36,18 +36,16 @@ var ThumbnailView = Backbone.View.extend({
     }
   },
   onThumbLoadError: function (ev) {
-    var el = $(ev.target);
+    const el = $(ev.target);
     el.parent().removeClass('has-thumbnail');
     el.remove();
   },
   render: function () {
-    var type = this.model.get('type'),
-      thumbnailSrc = this.model.get('thumbnail'),
-      isImage = fileTypes.isImage(type);
+    const type = this.model.get('type'), thumbnailSrc = this.model.get('thumbnail'), isImage = fileTypes.isImage(type);
 
-    var generateThumbnail = this._fileViewer.getConfig().generateThumbnail;
+    const generateThumbnail = this._fileViewer.getConfig().generateThumbnail;
 
-    var $thumbnail = $(_templateStore.get('placeholderThumbnail')({
+    const $thumbnail = $(_templateStore.get('placeholderThumbnail')({
       iconClass: getCssClass(type),
       title: this.model.get('title')
     }));
@@ -57,7 +55,7 @@ var ThumbnailView = Backbone.View.extend({
     if (thumbnailSrc && generateThumbnail) {
       generateThumbnail(this.model).done(function (thumbSrc) {
         $thumbnail.replaceWith(_templateStore.get('thumbnail')({
-          iconClass: iconUtils.getCssClass(type),
+          iconClass: getCssClass(type),
           thumbnailSrc: thumbSrc,
           title: this.model.get('title')
         }));
@@ -65,7 +63,7 @@ var ThumbnailView = Backbone.View.extend({
       }.bind(this));
     } else if (isImage || thumbnailSrc) {
       $thumbnail.replaceWith(_templateStore.get('thumbnail')({
-        iconClass: iconUtils.getCssClass(type),
+        iconClass: getCssClass(type),
         thumbnailSrc: thumbnailSrc || this.model.get('src'),
         title: this.model.get('title')
       }));

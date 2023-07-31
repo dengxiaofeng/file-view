@@ -1,5 +1,6 @@
-import JSZip from "jszip";
+import JSZip from 'jszip'
 import { getBinaryContent } from './common/methods'
+
 export class HandleZip {
   constructor(file) {
     if(file instanceof File) {

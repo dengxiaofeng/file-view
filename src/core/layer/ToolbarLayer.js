@@ -4,17 +4,17 @@ import _ from 'underscore'
 import { keys } from '../../constant/keyboard';
 import {_templateStore} from '../store/template-store';
 
-var HIDE_CONTROLS_TIMEOUT = 500;
+const HIDE_CONTROLS_TIMEOUT = 500;
 
 
-var THROTTLE_MOUSEMOVE = HIDE_CONTROLS_TIMEOUT - 100;
+const THROTTLE_MOUSEMOVE = HIDE_CONTROLS_TIMEOUT - 100;
 
 
-var HIDE_ANIMATION_DURATION = 400;
-var SHOW_ANIMATION_DURATION = 100;
+const HIDE_ANIMATION_DURATION = 400;
+const SHOW_ANIMATION_DURATION = 100;
 
 
-var ToolbarLayer = Backbone.View.extend({
+const ToolbarLayer = Backbone.View.extend({
 
   className: 'cp-toolbar-layer',
 
@@ -24,8 +24,7 @@ var ToolbarLayer = Backbone.View.extend({
     this._toggleControlsTimeout = null;
     this._actions = [];
 
-    $('#cp-file-body').on('mousemove.toolbarLayer', this._showControlsOnMove.bind(
-      this));
+    $('#cp-file-body').on('mousemove.toolbarLayer', this._showControlsOnMove.bind(this));
     $(document).on('keydown.tabToNavigate', this._tabToNavigate.bind(this));
   },
 
@@ -44,7 +43,7 @@ var ToolbarLayer = Backbone.View.extend({
     // });
     this.$toolbar = this.$('.cp-toolbar');
 
-    var listeners = {};
+    const listeners = {};
     this._actions.forEach(function (action) {
       listeners['click .' + action.className] = action.handler;
 
@@ -111,7 +110,7 @@ var ToolbarLayer = Backbone.View.extend({
   },
 
   _removeTooltipForElement: function (pos, el) {
-    var tipsyId = $(el).attr('aria-describedby');
+    const tipsyId = $(el).attr('aria-describedby');
     if (tipsyId) {
       $('#' + tipsyId).fadeOut();
     }

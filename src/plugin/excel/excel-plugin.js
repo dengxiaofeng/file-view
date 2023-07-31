@@ -19,7 +19,6 @@ const excelPlugin = BaseViewer.extend({
       header: '您的预览即将出现!',
       message: '着急吗？您现在可以下载原件。'
     }));
-    console.log("this", this);
     window.$loadLuckySheet((res) => {
       this.$el.html(`<div id="luckysheet" style=" margin: 0px; padding: 0px;position: absolute;width: 100%;max-width: 80%;left: 50%;top: 0;transform: translateX(-50%);bottom: 0px;"></div>`);
       if(window.luckysheet) {

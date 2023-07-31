@@ -1,7 +1,7 @@
 import Backbone from 'backbone'
 import {_templateStore} from '../store/template-store';
 
-var WaitingLayer = Backbone.View.extend({
+const WaitingLayer = Backbone.View.extend({
 
   className: 'cp-waiting-layer',
 

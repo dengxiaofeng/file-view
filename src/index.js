@@ -1,21 +1,7 @@
-// Import here Polyfills if needed. Recommended core-js (npm i -D core-js)
-  // import "core-js/fn/array.find"
-  // ...
-
-// export default class DummyClass {
-// 	constructor(name,age){
-// 		this.name=name
-// 		this.age=age
-// 		this.body = $('body')
-// 	}
-// }
-
-
 import FileViewer from './core/component/FileView.js'
 import './resource/css/fileview.css'
 import minimodePlugin from './plugin/thumbnail/MinimodePlugin'
 FileViewer.registerPlugin('minimode', minimodePlugin);
-
 window.$loadLuckySheet= (callback) => {
   if (window.$loadLuckySheet.scriptLoaded) return typeof callback === 'function' && callback(require);
   const script = document.createElement('script');

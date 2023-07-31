@@ -1,6 +1,6 @@
-var noop = function () {};
+const noop = function () {};
 
-var NoopFocusManager = function ($el) {};
+const NoopFocusManager = function ($el) {};
 
 NoopFocusManager.prototype.trapFocus = noop;
 

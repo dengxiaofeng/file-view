@@ -3,7 +3,7 @@ import { keys } from '../../constant/keyboard';
 const baseMode = {
   activateHook: function (mainView) {
     mainView.$el.on('click #cp-file-body', mainView._onClickToBackground.bind(mainView));
-    var $arrowLayer = mainView.fileContentView.getLayerForName('arrows').$el;
+    const $arrowLayer = mainView.fileContentView.getLayerForName('arrows').$el;
     $arrowLayer.toggle(this.showsArrowLayer);
   },
 
@@ -25,7 +25,7 @@ const baseMode = {
   showsArrowLayer: true,
 
   _handleKeys: function (e) {
-    var contentView, viewer;
+    let contentView, viewer;
 
     if (this.fileContentView.isLayerInitialized('content')) {
       contentView = this.fileContentView.getLayerForName('content');

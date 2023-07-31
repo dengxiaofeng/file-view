@@ -1,6 +1,6 @@
 import Backbone from 'backbone'
 
-var ViewerLayer = Backbone.View.extend({
+const ViewerLayer = Backbone.View.extend({
 
   className: 'cp-viewer-layer',
 
