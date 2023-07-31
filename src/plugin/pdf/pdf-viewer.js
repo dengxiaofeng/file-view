@@ -563,9 +563,8 @@ PDFViewer.prototype.updateViewarea = function () {
 
   let currentId = this.page;
   const firstPage = visible.first;
-
-  for (let i = 0, ii = visiblePages.length, stillFullyVisible = false;
-       i < ii; ++i) {
+  let stillFullyVisible = false
+  for (let i = 0, ii = visiblePages.length; i < ii; ++i) {
     const page = visiblePages[ i ];
 
     if (page.percent < 100) {
